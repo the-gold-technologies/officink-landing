@@ -41,24 +41,23 @@ const Reveal = ({ children, className = "" }: { children: React.ReactNode, class
 };
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState(0);
 
   return (
     <main className="min-h-screen font-body selection:bg-brand-teal selection:text-white">
       {/* NAV */}
-      <nav className="absolute top-0 left-0 right-0 z-[100] flex items-center justify-between px-[6vw] h-[80px] bg-transparent">
+      <nav className="absolute top-0 left-0 right-0 z-[100] flex items-center justify-between px-[6vw] h-[100px] bg-transparent">
         <Link href="#" className="flex items-center gap-2 no-underline">
-          <img src="/fulllogo_transparent.png" alt="Patungans Logo" className="h-[100px] w-auto object-contain" />
+          <img src="/fulllogo_transparent.png" alt="Officink Logo" className="h-[90px] w-auto object-contain" />
         </Link>
-        <div className="hidden md:flex items-center gap-10">
-          <Link href="#service" className="text-gray-500 text-[15px] hover:text-gray-900 transition-colors">Service</Link>
-          <Link href="#product" className="text-gray-500 text-[15px] hover:text-gray-900 transition-colors">Product</Link>
-          <Link href="#blog" className="text-gray-500 text-[15px] hover:text-gray-900 transition-colors">Blog</Link>
-          <Link href="#about" className="text-gray-500 text-[15px] hover:text-gray-900 transition-colors">About Us</Link>
+        <div className="hidden md:flex items-center gap-10 font-medium">
+          <Link href="#solutions" className="text-gray-500 text-[14px] hover:text-[#5384CD] transition-colors">Solutions</Link>
+          <Link href="#features" className="text-gray-500 text-[14px] hover:text-[#5384CD] transition-colors">Features</Link>
+          <Link href="#roles" className="text-gray-500 text-[14px] hover:text-[#5384CD] transition-colors">Roles</Link>
+          <Link href="#cta" className="text-gray-500 text-[14px] hover:text-[#5384CD] transition-colors">Get Started</Link>
         </div>
         <div className="hidden sm:block">
-          <Link href="#cta" className="bg-[#1f2229] text-white font-medium text-[14px] py-3 px-6 rounded-xl hover:bg-black transition-all">
-            Get a Demo
+          <Link href="#cta" className="bg-[#0B0F1A] text-white font-bold text-[13px] py-3 px-6 rounded-xl hover:bg-[#5384CD] transition-all shadow-lg shadow-blue-500/20">
+            Login
           </Link>
         </div>
       </nav>
@@ -178,390 +177,261 @@ export default function Home() {
       </section>
 
       {/* KEY SOLUTIONS */}
-      <section id="solutions" className="bg-white border-y border-gray-100 py-[110px] px-[6vw] max-sm:py-[70px]">
-        <div className="inline-flex items-center gap-[7px] bg-[#EAF3FF] border border-[#5384CD]/20 text-[#5384CD] text-[11px] font-bold tracking-[2px] uppercase py-1.5 px-3.5 rounded-full mb-5">
-          <span className="w-[5px] h-[5px] bg-[#5384CD] rounded-full animate-blink"></span>Key Solutions
-        </div>
-        <Reveal>
-          <h2 className="font-display text-[clamp(1.9rem,3vw,2.6rem)] font-bold tracking-[-1px] mb-12 text-gray-900">
-            Everything Your Office Runs On,<br/><span className="bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] text-transparent bg-clip-text">Centralized.</span>
+      <section id="solutions" className="bg-white py-[110px] px-[6vw] max-sm:py-[70px]">
+        <Reveal className="text-center max-w-3xl mx-auto mb-20">
+          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] font-extrabold tracking-[-1px] mb-4 text-gray-900">
+            Run your office on <span className="bg-gradient-to-r from-[#00C6A7] to-[#3AC6F5] text-transparent bg-clip-text">Autopilot</span>
           </h2>
-        </Reveal>
-
-        <Reveal>
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[1px] bg-gray-100 border border-gray-100 rounded-[20px] overflow-hidden shadow-sm">
-            {[
-              { icon: "🖥️", title: "Centralized Dashboard", desc: "Manage all office operations — attendance, payroll, billing, and expenses — from one unified admin panel." },
-              { icon: "📍", title: "Attendance Tracking", desc: "Location-verified selfie capture with login and logout timestamps. Tamper-proof and accurate every shift." },
-              { icon: "💰", title: "Automated Salary Calculation", desc: "Salary auto-computed from attendance records, overtime hours, and approved leaves. Zero manual errors." },
-              { icon: "🗓️", title: "Leave Management", desc: "Employees request leaves via app. Managers approve instantly. Full history and holiday calendar included." },
-              { icon: "📋", title: "Quotation Creation", desc: "Generate customizable quotations with GST support in seconds. Professional formats ready to send." },
-              { icon: "🧾", title: "Invoice Generation", desc: "Create GST-compliant invoices and track payment status — paid, pending, or overdue — at a glance." },
-              { icon: "💳", title: "Expense Recording", desc: "Log travel, office, utility, and miscellaneous expenses with category tags. Real-time budget tracking." },
-              { icon: "📊", title: "Employee-wise Reports", desc: "Downloadable reports per employee for attendance, salary, and expenses. Ready for audits and compliance." },
-              { icon: "🔐", title: "Role-Based Access", desc: "Separate access for Admin, HR, and Accounts. Each role sees exactly what they need — nothing more." },
-            ].map((sol, i) => (
-              <div key={i} className="bg-white p-[32px_28px] relative group hover:bg-gray-50 transition-colors duration-250">
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] opacity-0 group-hover:opacity-100 transition-opacity duration-250"></div>
-                <div className="w-[44px] h-[44px] rounded-xl bg-[#EAF3FF] border border-[#5384CD]/20 flex items-center justify-center text-xl mb-3.5 shadow-sm">
-                  {sol.icon}
-                </div>
-                <h4 className="font-display text-[0.95rem] font-bold mb-2 leading-snug text-gray-900">{sol.title}</h4>
-                <p className="text-[0.825rem] text-gray-500 leading-[1.65] font-medium">{sol.desc}</p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </section>
-
-      {/* FEATURES DEEP DIVE */}
-      <section id="features" className="bg-[#F8F9FB] py-[110px] px-[6vw] max-sm:py-[70px]">
-        <div className="inline-flex items-center gap-[7px] bg-[#EAF3FF] border border-[#5384CD]/20 text-[#5384CD] text-[11px] font-bold tracking-[2px] uppercase py-1.5 px-3.5 rounded-full mb-5">
-          <span className="w-[5px] h-[5px] bg-[#5384CD] rounded-full animate-blink"></span>Feature Details
-        </div>
-        <Reveal>
-          <h2 className="font-display text-[clamp(1.9rem,3vw,2.6rem)] font-bold tracking-[-1px] text-gray-900">
-            Built for Every Corner of<br/><span className="bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] text-transparent bg-clip-text">Your Office</span>
-          </h2>
-        </Reveal>
-
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-14 items-start mt-[60px]">
-          {/* Tabs */}
-          <Reveal className="flex lg:flex-col flex-row flex-wrap gap-2">
-            {[
-              { icon: "📍", label: "Attendance Tracking" },
-              { icon: "💰", label: "Salary & Payroll" },
-              { icon: "🗓️", label: "Leave Management" },
-              { icon: "🧾", label: "Billing & Invoicing" },
-              { icon: "💳", label: "Expense Recording" },
-            ].map((tab, idx) => (
-              <button 
-                key={idx}
-                onClick={() => setActiveTab(idx)}
-                className={`flex items-center gap-3.5 p-[16px_20px] max-lg:p-[10px_14px] rounded-xl cursor-pointer border transition-all text-left font-body shadow-sm hover:shadow-md ${
-                  activeTab === idx ? 'bg-white border-[#5384CD]/30 ring-1 ring-[#5384CD]/20' : 'bg-white border-gray-100 hover:bg-gray-50'
-                }`}
-              >
-                <div className={`w-[38px] h-[38px] rounded-[10px] shrink-0 flex items-center justify-center text-[17px] border transition-all ${
-                  activeTab === idx ? 'bg-[#EAF3FF] border-[#5384CD]/20 text-[#5384CD]' : 'bg-gray-50 border-gray-100 text-gray-400'
-                }`}>
-                  {tab.icon}
-                </div>
-                <span className={`text-sm max-lg:text-xs font-semibold transition-colors ${
-                  activeTab === idx ? 'text-gray-900' : 'text-gray-500'
-                }`}>
-                  {tab.label}
-                </span>
-              </button>
-            ))}
-          </Reveal>
-
-          {/* Panels */}
-          <div className="relative">
-            {[
-              {
-                icon: "📍", title: "Attendance Tracking", desc: "Location-based selfie attendance with login/logout timestamps for complete, verified records.",
-                bullets: [
-                  "GPS-verified location check-in ensures employees are physically present at their designated location",
-                  "Selfie capture at login prevents buddy punching and proxy attendance entirely",
-                  "Login and logout timestamps auto-recorded with no manual input required",
-                  "Attendance data feeds directly into salary calculation — fully automated"
-                ]
-              },
-              {
-                icon: "💰", title: "Automated Salary Calculation", desc: "Payroll computed automatically from real attendance data, overtime, and approved leaves.",
-                bullets: [
-                  "Salary calculated based on actual attendance records — no spreadsheet errors",
-                  "Overtime hours automatically factored into final salary computation",
-                  "Leave deductions applied based on approved and unapproved absence records",
-                  "One-click downloadable payroll reports per employee for compliance"
-                ]
-              },
-              {
-                icon: "🗓️", title: "Leave Management", desc: "Streamlined leave request, approval, and history tracking for the entire team.",
-                bullets: [
-                  "Employees submit leave requests directly from the mobile app — no paperwork",
-                  "Managers approve or reject with one tap; employee notified instantly",
-                  "Full leave history per employee visible to HR for audit and planning",
-                  "Company holiday list visible to all staff via mobile app"
-                ]
-              },
-              {
-                icon: "🧾", title: "Billing & Invoicing", desc: "Create quotations and invoices instantly with GST support and payment status tracking.",
-                bullets: [
-                  "Generate professional quotations in customizable formats with GST auto-applied",
-                  "Convert approved quotations to invoices in one click — no re-entry needed",
-                  "Track payment status — paid, pending, or partially paid — per invoice",
-                  "Downloadable billing reports for compliance and client records"
-                ]
-              },
-              {
-                icon: "💳", title: "Expense Recording", desc: "Categorized expense tracking for travel, office, utilities, and miscellaneous costs.",
-                bullets: [
-                  "Log expenses by category — travel, office supplies, utilities, and miscellaneous",
-                  "Attach receipts and notes to each expense entry for clear records",
-                  "Track spending against budget in real time from the admin dashboard",
-                  "Employee-wise expense reports downloadable for payroll and reimbursement"
-                ]
-              },
-            ].map((panel, idx) => (
-              <div 
-                key={idx} 
-                className={`${activeTab === idx ? "block animate-[panelFade_0.3s_ease]" : "hidden"}`}
-              >
-                <div className="bg-white border border-gray-100 rounded-[24px] overflow-hidden shadow-lg shadow-gray-200/50">
-                  <div className="p-[32px_32px_24px] border-b border-gray-50 flex items-start gap-5">
-                    <div className="w-[56px] h-[56px] rounded-[16px] shrink-0 bg-[#EAF3FF] border border-[#5384CD]/20 flex items-center justify-center text-2xl shadow-sm text-[#5384CD]">
-                      {panel.icon}
-                    </div>
-                    <div>
-                      <h3 className="font-display text-[1.25rem] font-bold mb-2 text-gray-900">{panel.title}</h3>
-                      <p className="text-[0.95rem] text-gray-500 leading-[1.6] font-medium">{panel.desc}</p>
-                    </div>
-                  </div>
-                  <div className="p-[28px_32px] flex flex-col gap-3">
-                    {panel.bullets.map((bullet, bi) => (
-                      <div key={bi} className="flex items-start gap-3 p-[14px_16px] bg-gray-50 border border-gray-100 rounded-[12px]">
-                        <div className="w-[20px] h-[20px] rounded-md shrink-0 mt-[2px] bg-[#EAF3FF] border border-[#5384CD]/30 flex items-center justify-center text-[11px] text-[#5384CD] font-bold">✓</div>
-                        <span className="text-[0.9rem] text-gray-600 leading-[1.5] font-medium">{bullet}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ROLE-BASED ACCESS */}
-      <section id="roles" className="bg-white py-[110px] px-[6vw] max-sm:py-[70px] border-y border-gray-100">
-        <div className="inline-flex items-center gap-[7px] bg-[#EAF3FF] border border-[#5384CD]/20 text-[#5384CD] text-[11px] font-bold tracking-[2px] uppercase py-1.5 px-3.5 rounded-full mb-5">
-          <span className="w-[5px] h-[5px] bg-[#5384CD] rounded-full animate-blink"></span>Role-Based Access
-        </div>
-        <Reveal>
-          <h2 className="font-display text-[clamp(1.9rem,3vw,2.6rem)] font-bold tracking-[-1px] text-gray-900">
-            The Right Access for<br/><span className="bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] text-transparent bg-clip-text">Every Role</span>
-          </h2>
-          <p className="text-gray-500 text-[1.05rem] mt-4 max-w-[520px] leading-[1.7] font-medium">
-            Separate dashboards and permissions for Admin, HR, and Accounts ensure every team member works with exactly what they need.
+          <p className="text-gray-500 text-[1.05rem] font-medium leading-[1.6]">
+            Replace 10 different tools with one OfficeBook. Managing your team has never been this simple.
           </p>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-[56px]">
-          <Reveal className="bg-white border border-gray-100 rounded-[24px] p-[32px_28px] hover:-translate-y-1.5 transition-all duration-300 shadow-lg shadow-gray-200/40 relative overflow-hidden group">
-            <div className="absolute top-0 left-0 right-0 h-[4px] bg-[#5384CD]"></div>
-            <div className="text-[10px] font-bold tracking-[2px] uppercase py-1.5 px-3 rounded-full mb-5 inline-block bg-[#EAF3FF] text-[#5384CD]">Admin</div>
-            <h3 className="font-display text-[1.25rem] font-bold mb-3 text-gray-900">Administrator</h3>
-            <p className="text-[0.9rem] text-gray-500 leading-[1.65] mb-6 font-medium">Full visibility across all operations. Manage staff, oversee billing, approve decisions, and access every report.</p>
-            <div className="flex flex-col gap-2.5 border-t border-gray-100 pt-5">
-              <div className="flex items-center gap-2.5 text-[13px] text-gray-600 font-medium"><div className="w-[6px] h-[6px] rounded-full shrink-0 bg-[#5384CD]"></div>Centralized dashboard</div>
-              <div className="flex items-center gap-2.5 text-[13px] text-gray-600 font-medium"><div className="w-[6px] h-[6px] rounded-full shrink-0 bg-[#5384CD]"></div>Attendance & payroll oversight</div>
-              <div className="flex items-center gap-2.5 text-[13px] text-gray-600 font-medium"><div className="w-[6px] h-[6px] rounded-full shrink-0 bg-[#5384CD]"></div>Invoice & quotation management</div>
-              <div className="flex items-center gap-2.5 text-[13px] text-gray-600 font-medium"><div className="w-[6px] h-[6px] rounded-full shrink-0 bg-[#5384CD]"></div>All reports — downloadable</div>
+        <Reveal>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: "🖥️", title: "Centralized Dashboard", desc: "Manage all office operations — attendance, payroll, billing, and expenses — from one unified admin panel.", color: "bg-blue-50 text-blue-500" },
+              { icon: "📍", title: "Attendance Tracking", desc: "Location-verified selfie capture with login and logout timestamps. Tamper-proof and accurate every shift.", color: "bg-pink-50 text-pink-500" },
+              { icon: "💰", title: "Automated Salary", desc: "Salary auto-computed from attendance records, overtime hours, and approved leaves. Zero manual errors.", color: "bg-amber-50 text-amber-500" },
+              { icon: "🗓️", title: "Leave Management", desc: "Employees request leaves via app. Managers approve instantly. Full history and holiday calendar included.", color: "bg-indigo-50 text-indigo-500" },
+              { icon: "📋", title: "Quotation Creation", desc: "Generate customizable quotations with GST support in seconds. Professional formats ready to send.", color: "bg-orange-50 text-orange-500" },
+              { icon: "🧾", title: "Invoice Generation", desc: "Create GST-compliant invoices and track payment status — paid, pending, or overdue — at a glance.", color: "bg-teal-50 text-teal-500" },
+              { icon: "💳", title: "Expense Recording", desc: "Log travel, office, utility, and miscellaneous expenses with category tags. Real-time budget tracking.", color: "bg-cyan-50 text-cyan-500" },
+              { icon: "📊", title: "Employee Reports", desc: "Downloadable reports per employee for attendance, salary, and expenses. Ready for audits and compliance.", color: "bg-purple-50 text-purple-500" },
+            ].map((sol, i) => (
+              <div key={i} className="bg-white border border-gray-100 rounded-[20px] p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div className={`w-[48px] h-[48px] rounded-xl flex items-center justify-center text-xl mb-6 ${sol.color}`}>
+                  {sol.icon}
+                </div>
+                <h4 className="font-display text-[1.1rem] font-bold mb-3 text-gray-900">{sol.title}</h4>
+                <p className="text-[0.875rem] text-gray-500 leading-[1.6] font-medium">{sol.desc}</p>
+              </div>
+            ))}
+            
+            {/* Role Access Card Integrated */}
+            <div className="bg-white border border-gray-100 rounded-[20px] p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+               <div className="w-[48px] h-[48px] rounded-xl flex items-center justify-center text-xl mb-6 bg-gray-50 text-gray-600">
+                  🔐
+                </div>
+                <h4 className="font-display text-[1.1rem] font-bold mb-3 text-gray-900">Role-Based Access</h4>
+                <p className="text-[0.875rem] text-gray-500 leading-[1.6] font-medium">Separate access for Admin, HR, and Accounts. Each role sees exactly what they need.</p>
             </div>
-          </Reveal>
-
-          <Reveal className="bg-white border border-gray-100 rounded-[24px] p-[32px_28px] hover:-translate-y-1.5 transition-all duration-300 shadow-lg shadow-gray-200/40 relative overflow-hidden group">
-            <div className="absolute top-0 left-0 right-0 h-[4px] bg-[#F5A623]"></div>
-            <div className="text-[10px] font-bold tracking-[2px] uppercase py-1.5 px-3 rounded-full mb-5 inline-block bg-[#FFF4E0] text-[#F5A623]">HR</div>
-            <h3 className="font-display text-[1.25rem] font-bold mb-3 text-gray-900">Human Resources</h3>
-            <p className="text-[0.9rem] text-gray-500 leading-[1.65] mb-6 font-medium">Manage attendance, process leaves, calculate salaries, and access employee performance records.</p>
-            <div className="flex flex-col gap-2.5 border-t border-gray-100 pt-5">
-              <div className="flex items-center gap-2.5 text-[13px] text-gray-600 font-medium"><div className="w-[6px] h-[6px] rounded-full shrink-0 bg-[#F5A623]"></div>Attendance tracking & verification</div>
-              <div className="flex items-center gap-2.5 text-[13px] text-gray-600 font-medium"><div className="w-[6px] h-[6px] rounded-full shrink-0 bg-[#F5A623]"></div>Leave request approval</div>
-              <div className="flex items-center gap-2.5 text-[13px] text-gray-600 font-medium"><div className="w-[6px] h-[6px] rounded-full shrink-0 bg-[#F5A623]"></div>Salary calculation & payroll</div>
-              <div className="flex items-center gap-2.5 text-[13px] text-gray-600 font-medium"><div className="w-[6px] h-[6px] rounded-full shrink-0 bg-[#F5A623]"></div>Employee-wise reports</div>
-            </div>
-          </Reveal>
-
-          <Reveal className="bg-white border border-gray-100 rounded-[24px] p-[32px_28px] hover:-translate-y-1.5 transition-all duration-300 shadow-lg shadow-gray-200/40 relative overflow-hidden group">
-            <div className="absolute top-0 left-0 right-0 h-[4px] bg-[#3AC6F5]"></div>
-            <div className="text-[10px] font-bold tracking-[2px] uppercase py-1.5 px-3 rounded-full mb-5 inline-block bg-[#E0F7FF] text-[#3AC6F5]">Accounts</div>
-            <h3 className="font-display text-[1.25rem] font-bold mb-3 text-gray-900">Accounts Team</h3>
-            <p className="text-[0.9rem] text-gray-500 leading-[1.65] mb-6 font-medium">Handle all financial operations — invoices, quotations, expense records, and billing compliance reports.</p>
-            <div className="flex flex-col gap-2.5 border-t border-gray-100 pt-5">
-              <div className="flex items-center gap-2.5 text-[13px] text-gray-600 font-medium"><div className="w-[6px] h-[6px] rounded-full shrink-0 bg-[#3AC6F5]"></div>Invoice & quotation generation</div>
-              <div className="flex items-center gap-2.5 text-[13px] text-gray-600 font-medium"><div className="w-[6px] h-[6px] rounded-full shrink-0 bg-[#3AC6F5]"></div>Payment status tracking</div>
-              <div className="flex items-center gap-2.5 text-[13px] text-gray-600 font-medium"><div className="w-[6px] h-[6px] rounded-full shrink-0 bg-[#3AC6F5]"></div>Expense recording & categories</div>
-              <div className="flex items-center gap-2.5 text-[13px] text-gray-600 font-medium"><div className="w-[6px] h-[6px] rounded-full shrink-0 bg-[#3AC6F5]"></div>Billing & compliance reports</div>
-            </div>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </section>
 
-      {/* REPORTS */}
-      <section id="reports" className="bg-[#F8F9FB] py-[110px] px-[6vw] max-sm:py-[70px]">
-        <div className="inline-flex items-center gap-[7px] bg-[#EAF3FF] border border-[#5384CD]/20 text-[#5384CD] text-[11px] font-bold tracking-[2px] uppercase py-1.5 px-3.5 rounded-full mb-5">
-          <span className="w-[5px] h-[5px] bg-[#5384CD] rounded-full animate-blink"></span>Reports & Downloads
-        </div>
-        <Reveal>
-          <h2 className="font-display text-[clamp(1.9rem,3vw,2.6rem)] font-bold tracking-[-1px] text-gray-900">
-            Every Report You Need,<br/><span className="bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] text-transparent bg-clip-text">Ready to Download</span>
+      {/* FEATURES DEEP DIVE (Bento Grid) */}
+      <section id="features" className="bg-[#F8F9FB] py-[110px] px-[6vw] max-sm:py-[70px]">
+        <Reveal className="text-center max-w-3xl mx-auto mb-20">
+          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] font-extrabold tracking-[-1px] mb-4 text-gray-900">
+            Everything you need,<br/><span className="text-[#00C6A7]">Nothing you don't.</span>
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-14 items-center mt-[60px]">
-          <div className="flex flex-col gap-4">
-            {[
-              { icon: "🗓️", title: "Attendance Report", desc: "Employee-wise daily and monthly attendance with login/logout times" },
-              { icon: "💰", title: "Salary / Payroll Report", desc: "Auto-calculated salary per employee with overtime and deductions" },
-              { icon: "🧾", title: "Billing Report", desc: "Invoice and quotation history with GST breakdown and payment status" },
-              { icon: "💳", title: "Expense Report", desc: "Category-wise expense records per employee for audits and reimbursements" },
-              { icon: "📋", title: "Compliance Report", desc: "Combined payroll and billing data formatted for regulatory compliance" },
-            ].map((r, i) => (
-              <Reveal key={i} className="flex items-center gap-5 p-[20px_24px] bg-white border border-gray-100 rounded-[18px] hover:border-[#5384CD]/30 hover:shadow-md hover:translate-x-1.5 transition-all cursor-default shadow-sm group">
-                <div className="w-[46px] h-[46px] rounded-[14px] shrink-0 bg-[#EAF3FF] border border-[#5384CD]/20 flex items-center justify-center text-[20px] shadow-sm">{r.icon}</div>
-                <div>
-                  <h4 className="font-display text-[1rem] font-bold mb-[3px] text-gray-900 group-hover:text-[#5384CD] transition-colors">{r.title}</h4>
-                  <p className="text-[0.85rem] text-gray-500 font-medium">{r.desc}</p>
-                </div>
-                <div className="ml-auto text-[11px] text-[#5384CD] font-bold whitespace-nowrap bg-[#EAF3FF] py-1 px-2 rounded-lg">↓ PDF / Excel</div>
-              </Reveal>
-            ))}
-          </div>
+        <Reveal>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {/* Large Card 1 */}
+            <div className="lg:col-span-2 bg-[#0B0F1A] rounded-[30px] p-10 relative overflow-hidden text-white flex flex-col justify-center min-h-[400px]">
+              <div className="relative z-10 max-w-[400px]">
+                 <div className="w-10 h-10 rounded-full bg-[#E91E63]/20 flex items-center justify-center text-lg mb-6 text-[#E91E63]">📍</div>
+                 <h3 className="font-display text-[1.75rem] font-bold mb-4">GPS & Selfie Attendance</h3>
+                 <p className="text-gray-400 text-[1rem] leading-[1.6] mb-8">Eliminate time theft. Employees must be at the office location to check in. Selfie verification adds an extra layer of security.</p>
+              </div>
+              
+              {/* Abstract UI for Attendance */}
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[300px] h-[340px] bg-[#1C2537] rounded-l-2xl border-l border-t border-b border-white/10 p-4 shadow-2xl translate-x-[20%] lg:translate-x-0 hidden sm:block">
+                 <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-3">
+                       <div className="w-8 h-8 rounded-full bg-gray-600"></div>
+                       <div><div className="w-20 h-2 bg-gray-600 rounded"></div><div className="w-12 h-2 bg-gray-700 rounded mt-1"></div></div>
+                    </div>
+                    <div className="bg-green-500/20 text-green-500 text-[10px] px-2 py-0.5 rounded">On-Time</div>
+                 </div>
+                 <div className="w-full h-[180px] bg-gray-800 rounded-lg mb-4 flex items-center justify-center text-gray-600 text-xs">Map View</div>
+                 <div className="flex justify-center"><div className="w-12 h-12 rounded-full border-4 border-green-500 flex items-center justify-center">📸</div></div>
+              </div>
+            </div>
 
-          <Reveal className="bg-white border border-gray-100 rounded-[24px] p-7 shadow-xl shadow-gray-200/60">
-            <div className="text-[14px] font-bold mb-5 flex items-center justify-between text-gray-900">
-              Attendance Report — March 2025
-              <button className="bg-[#EAF3FF] border border-[#5384CD]/20 text-[#5384CD] text-[10px] font-bold py-1.5 px-3 rounded-lg cursor-pointer hover:bg-[#5384CD]/10 transition-colors">↓ Download</button>
+            {/* Tall Card 2 */}
+            <div className="bg-white rounded-[30px] p-8 border border-gray-100 flex flex-col min-h-[400px]">
+               <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-lg mb-6 text-orange-500">💰</div>
+               <h3 className="font-display text-[1.25rem] font-bold mb-2">Auto Payroll</h3>
+               <p className="text-gray-500 text-[0.9rem] leading-[1.6] mb-8">Zero manual calculation. Attendance + Overtime + Leaves = Final Salary.</p>
+               
+               <div className="mt-auto bg-gray-50 rounded-xl p-4 border border-gray-100">
+                  <div className="flex justify-between text-[11px] text-gray-500 mb-2"><span>Basic Salary</span><span>₹25,000</span></div>
+                  <div className="flex justify-between text-[11px] text-green-600 mb-4"><span>+ Overtime (4h)</span><span>₹1,200</span></div>
+                  <div className="border-t border-gray-200 pt-3 flex justify-between text-[13px] font-bold text-gray-900"><span>Total Payout</span><span>₹26,200</span></div>
+               </div>
             </div>
-            <table className="w-full border-collapse text-left">
-              <thead>
-                <tr>
-                  <th className="text-[10px] text-gray-400 font-bold tracking-[1px] uppercase px-3 pb-3 border-b border-gray-100">Employee</th>
-                  <th className="text-[10px] text-gray-400 font-bold tracking-[1px] uppercase px-3 pb-3 border-b border-gray-100">Days</th>
-                  <th className="text-[10px] text-gray-400 font-bold tracking-[1px] uppercase px-3 pb-3 border-b border-gray-100">OT Hrs</th>
-                  <th className="text-[10px] text-gray-400 font-bold tracking-[1px] uppercase px-3 pb-3 border-b border-gray-100">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { name: "Rahul Kumar", d: 22, ot: "4.5", s: "Present", sc: "bg-[#EAF3FF] text-[#5384CD]" },
-                  { name: "Priya Sharma", d: 19, ot: "0", s: "On Leave", sc: "bg-orange-50 text-orange-500" },
-                  { name: "Anil Mehra", d: 21, ot: "2.0", s: "Present", sc: "bg-[#EAF3FF] text-[#5384CD]" },
-                  { name: "Sunita Bai", d: 20, ot: "1.5", s: "Present", sc: "bg-[#EAF3FF] text-[#5384CD]" },
-                  { name: "Dev Rathore", d: 17, ot: "0", s: "Absent", sc: "bg-red-50 text-red-500" },
-                ].map((tr, i) => (
-                  <tr key={i}>
-                    <td className="text-[12px] p-[12px_10px] border-b border-gray-50 font-semibold text-gray-800">{tr.name}</td>
-                    <td className="text-[12px] p-[12px_10px] border-b border-gray-50 text-gray-500 font-medium">{tr.d}</td>
-                    <td className="text-[12px] p-[12px_10px] border-b border-gray-50 text-gray-500 font-medium">{tr.ot}</td>
-                    <td className="text-[12px] p-[12px_10px] border-b border-gray-50">
-                      <span className={`text-[10px] font-bold py-1 px-2.5 rounded-md ${tr.sc}`}>{tr.s}</span>
-                    </td>
-                  </tr>
+
+            {/* Small Card 3 */}
+            <div className="bg-white rounded-[30px] p-8 border border-gray-100">
+               <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-lg mb-4 text-blue-500">🗓️</div>
+               <h3 className="font-display text-[1.1rem] font-bold mb-2">Smart Leaves</h3>
+               <p className="text-gray-500 text-[0.85rem] leading-[1.6]">App-based requests & instant approvals.</p>
+            </div>
+
+            {/* Small Card 4 */}
+            <div className="bg-white rounded-[30px] p-8 border border-gray-100">
+               <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-lg mb-4 text-purple-500">🧾</div>
+               <h3 className="font-display text-[1.1rem] font-bold mb-2">GST Billing</h3>
+               <p className="text-gray-500 text-[0.85rem] leading-[1.6]">Create pro invoices in under 30 seconds.</p>
+            </div>
+
+            {/* Small Card 5 */}
+            <div className="bg-white rounded-[30px] p-8 border border-gray-100">
+               <div className="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center text-lg mb-4 text-cyan-500">💳</div>
+               <h3 className="font-display text-[1.1rem] font-bold mb-2">Expenses</h3>
+               <p className="text-gray-500 text-[0.85rem] leading-[1.6]">Track every rupee spent on office needs.</p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ROLE-BASED ACCESS */}
+      <section id="roles" className="bg-white py-[110px] px-[6vw] max-sm:py-[70px]">
+        <Reveal className="text-center max-w-3xl mx-auto mb-20">
+          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] font-extrabold tracking-[-1px] mb-4 text-gray-900">
+            One Tool, <span className="text-[#00C6A7]">Three Roles.</span>
+          </h2>
+          <p className="text-gray-500 text-[1.05rem] font-medium leading-[1.6]">
+             Separate views for Admin, HR, and Accounts to keep work focused and secure.
+          </p>
+        </Reveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          {/* Admin */}
+          <Reveal className="bg-white p-6 rounded-[24px] border border-gray-50 hover:border-green-100 hover:shadow-xl hover:shadow-green-500/5 transition-all group">
+             <span className="inline-block px-3 py-1 rounded-full bg-green-50 text-green-500 text-[10px] font-bold uppercase tracking-wider mb-6">Admin</span>
+             <h3 className="font-display text-xl font-bold mb-3">Admin Access</h3>
+             <p className="text-sm text-gray-500 leading-relaxed mb-6">Full visibility. Manage staff, oversee billing, approve decisions, and access every report.</p>
+             <ul className="space-y-3">
+                {["Centralized Dashboard", "Attendance Oversight", "Invoice Mgmt", "All Reports"].map((item, i) => (
+                   <li key={i} className="flex items-center gap-2.5 text-[12px] font-semibold text-gray-700">
+                      <div className="w-1.5 h-1.5 rounded-full bg-green-400"></div> {item}
+                   </li>
                 ))}
-              </tbody>
-            </table>
-            <div className="mt-5 text-[11px] text-gray-400 text-center pt-4 border-t border-gray-50 font-medium">
-              Salary auto-calculated from above data ↑
-            </div>
+             </ul>
+          </Reveal>
+
+          {/* HR */}
+          <Reveal className="bg-white p-6 rounded-[24px] border border-gray-50 hover:border-orange-100 hover:shadow-xl hover:shadow-orange-500/5 transition-all group">
+             <span className="inline-block px-3 py-1 rounded-full bg-orange-50 text-orange-500 text-[10px] font-bold uppercase tracking-wider mb-6">HR</span>
+             <h3 className="font-display text-xl font-bold mb-3">HR Access</h3>
+             <p className="text-sm text-gray-500 leading-relaxed mb-6">Manage attendance, process leaves, calculate salaries, and access employee records.</p>
+             <ul className="space-y-3">
+                {["Attendance Tracking", "Leave Approvals", "Salary Payroll", "Employee Data"].map((item, i) => (
+                   <li key={i} className="flex items-center gap-2.5 text-[12px] font-semibold text-gray-700">
+                      <div className="w-1.5 h-1.5 rounded-full bg-orange-400"></div> {item}
+                   </li>
+                ))}
+             </ul>
+          </Reveal>
+
+          {/* Accounts */}
+          <Reveal className="bg-white p-6 rounded-[24px] border border-gray-50 hover:border-blue-100 hover:shadow-xl hover:shadow-blue-500/5 transition-all group">
+             <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-500 text-[10px] font-bold uppercase tracking-wider mb-6">Accounts</span>
+             <h3 className="font-display text-xl font-bold mb-3">Accounts Access</h3>
+             <p className="text-sm text-gray-500 leading-relaxed mb-6">Handle all financial operations — invoices, quotations, expense records, and billing.</p>
+             <ul className="space-y-3">
+                {["Invoice Generation", "Payment Tracking", "Expense Recording", "Billing Reports"].map((item, i) => (
+                   <li key={i} className="flex items-center gap-2.5 text-[12px] font-semibold text-gray-700">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div> {item}
+                   </li>
+                ))}
+             </ul>
           </Reveal>
         </div>
       </section>
 
       {/* CTA */}
-      <section id="cta" className="bg-white border-t border-gray-100 text-center py-[120px] px-[6vw] relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-r from-[#5384CD]/5 to-[#3AC6F5]/5 -translate-x-1/2 -translate-y-1/2 pointer-events-none blur-3xl"></div>
-        <div className="relative z-10 max-w-[760px] mx-auto">
-          <div className="inline-flex items-center gap-[7px] bg-[#EAF3FF] border border-[#5384CD]/20 text-[#5384CD] text-[11px] font-bold tracking-[2px] uppercase py-1.5 px-3.5 rounded-full mb-5 mx-auto">
-            <span className="w-[5px] h-[5px] bg-[#5384CD] rounded-full animate-blink"></span>Get Started
-          </div>
-          <Reveal>
-            <h2 className="font-display text-[clamp(2.5rem,5vw,3.8rem)] font-bold tracking-[-1.5px] leading-[1.1] mb-6 text-gray-900">
-              Try OfficeBook<br/><span className="bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] text-transparent bg-clip-text">Right Now</span>
-            </h2>
-            <p className="text-gray-500 text-[1.1rem] leading-[1.7] mb-10 max-w-[600px] mx-auto font-medium">
-              No credit card. No setup. Use the credentials below to explore the full platform instantly — web portal and mobile app both available.
-            </p>
-          </Reveal>
+      <section id="cta" className="bg-white pb-[100px] px-[6vw]">
+        <div className="max-w-[1000px] mx-auto bg-[#000000] rounded-[40px] p-[60px_40px] text-center relative overflow-hidden">
+           {/* Glow Effects */}
+           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#00C6A7]/20 blur-[100px] rounded-full"></div>
+           
+           <div className="relative z-10">
+              <h2 className="font-display text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold text-white leading-[1.1] mb-4">
+                 Ready to transform your<br/>
+                 <span className="bg-gradient-to-r from-[#00C6A7] to-[#3AC6F5] text-transparent bg-clip-text">office operations?</span>
+              </h2>
+              <p className="text-gray-400 text-[1rem] mb-12 max-w-xl mx-auto">
+                 Start using OfficeBook today with our instant demo credentials.<br/> No signup required.
+              </p>
 
-          <Reveal className="flex gap-4 justify-center flex-wrap mb-14">
-            <Link href="https://evdtechnology.com" target="_blank" className="bg-gray-900 text-white font-display font-bold text-[16px] py-[16px] px-[32px] rounded-[14px] inline-flex items-center gap-2 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
-              🌐 Open Web Portal
-            </Link>
-            <Link href="https://play.google.com" target="_blank" className="bg-white border border-gray-200 text-gray-900 font-display font-bold text-[16px] py-[16px] px-[32px] rounded-[14px] inline-flex items-center gap-2 hover:border-[#5384CD] hover:text-[#5384CD] transition-all shadow-sm">
-              📱 Download App
-            </Link>
-          </Reveal>
+              <div className="flex flex-wrap justify-center gap-6">
+                 {/* Web Portal Login */}
+                 <div className="bg-[#1C1C1C] border border-white/10 rounded-[20px] p-6 w-[280px] text-left hover:border-white/20 transition-all">
+                    <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-4">WEB PORTAL LOGIN</div>
+                    <div className="flex justify-between text-xs text-gray-400 mb-2"><span>User: </span><span className="text-white font-mono font-bold">1010101010</span></div>
+                    <div className="flex justify-between text-xs text-gray-400 mb-6"><span>Pass: </span><span className="text-white font-mono font-bold">123456789</span></div>
+                    <Link href="https://evdtechnology.com" target="_blank" className="flex items-center justify-center w-full bg-white text-black font-bold text-xs py-3 rounded-xl hover:bg-gray-200 transition-colors">
+                       Launch Web Portal →
+                    </Link>
+                 </div>
 
-          <Reveal className="bg-white border border-gray-100 rounded-[24px] p-8 text-left max-w-[620px] mx-auto shadow-2xl shadow-gray-200/50 relative overflow-hidden">
-             <div className="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-[#5384CD] to-[#3AC6F5]"></div>
-            <div className="font-display font-bold text-[16px] mb-2 text-gray-900">🔑 Test Credentials</div>
-            <div className="text-[13px] text-gray-500 mb-6 font-medium">Explore the full platform with these pre-loaded demo accounts</div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-[#F8F9FB] border border-gray-100 rounded-xl p-5 hover:bg-[#EAF3FF] hover:border-[#5384CD]/20 transition-colors group">
-                <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-[#5384CD] mb-3">🌐 Web Portal</div>
-                <div className="flex justify-between items-center mb-2"><span className="text-[12px] text-gray-500 font-medium">Username</span><span className="font-display font-bold text-xs bg-white border border-gray-100 py-1 px-2 rounded text-gray-700">1010101010</span></div>
-                <div className="flex justify-between items-center mb-4"><span className="text-[12px] text-gray-500 font-medium">Password</span><span className="font-display font-bold text-xs bg-white border border-gray-100 py-1 px-2 rounded text-gray-700">123456789</span></div>
-                <Link href="https://evdtechnology.com" target="_blank" className="block text-center bg-[#5384CD] text-white font-display font-bold text-xs py-2.5 rounded-lg hover:bg-[#3466AF] transition-colors shadow-sm shadow-[#5384CD]/30">Launch Web Portal →</Link>
+                 {/* Mobile App Login */}
+                 <div className="bg-[#1C1C1C] border border-white/10 rounded-[20px] p-6 w-[280px] text-left hover:border-white/20 transition-all">
+                    <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-4">MOBILE APP LOGIN</div>
+                    <div className="flex justify-between text-xs text-gray-400 mb-2"><span>User: </span><span className="text-white font-mono font-bold">7829401605</span></div>
+                    <div className="flex justify-between text-xs text-gray-400 mb-6"><span>Pass: </span><span className="text-white font-mono font-bold">123456789</span></div>
+                    <Link href="https://play.google.com" target="_blank" className="flex items-center justify-center w-full bg-transparent border border-white/20 text-white font-bold text-xs py-3 rounded-xl hover:bg-white/10 transition-colors">
+                       Download App →
+                    </Link>
+                 </div>
               </div>
-              <div className="bg-[#F8F9FB] border border-gray-100 rounded-xl p-5 hover:bg-[#EAF3FF] hover:border-[#5384CD]/20 transition-colors group">
-                <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-[#3AC6F5] mb-3">📱 Mobile App</div>
-                <div className="flex justify-between items-center mb-2"><span className="text-[12px] text-gray-500 font-medium">Username</span><span className="font-display font-bold text-xs bg-white border border-gray-100 py-1 px-2 rounded text-gray-700">7829401605</span></div>
-                <div className="flex justify-between items-center mb-4"><span className="text-[12px] text-gray-500 font-medium">Password</span><span className="font-display font-bold text-xs bg-white border border-gray-100 py-1 px-2 rounded text-gray-700">123456789</span></div>
-                <Link href="https://play.google.com" target="_blank" className="block text-center bg-white border border-gray-200 text-gray-700 font-display font-bold text-xs py-2.5 rounded-lg hover:border-[#3AC6F5] hover:text-[#3AC6F5] transition-colors shadow-sm">Download App →</Link>
-              </div>
-            </div>
-          </Reveal>
+           </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-white border-t border-gray-100 py-[56px] px-[6vw] pb-7">
-        <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr] gap-[36px] md:gap-[56px] pb-10 border-b border-gray-100">
-          <div>
-            <Link href="#" className="flex items-center gap-0 no-underline text-gray-900 font-display font-black text-[18px] tracking-tight mb-2">
-              <span className="text-[#5B8DB8]">OFFIC</span><span className="text-[#00CFFF]">INK</span>
-            </Link>
-            <p className="text-[13px] text-gray-500 leading-[1.7] mt-3 max-w-[300px] font-medium">
-              An all-in-one office automation platform by EVD Technology LLP. Centralizing attendance, payroll, billing, and expense tracking for growing businesses.
-            </p>
-          </div>
+      <footer className="bg-white py-20 px-[6vw]">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+           <div className="max-w-xs">
+              <Link href="#" className="flex items-center gap-2 no-underline mb-6">
+                <img src="/fulllogo_transparent.png" alt="Officink Logo" className="h-[90px] w-auto object-contain" /> 
+              </Link>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                 An all-in-one office automation platform by EVD Technology LLP. Centralizing attendance, payroll, billing, and expense tracking for growing businesses.
+              </p>
+           </div>
+           
+           <div className="flex gap-20">
+              <div>
+                 <h4 className="font-bold text-sm text-gray-900 mb-4">Product</h4>
+                 <ul className="space-y-2 text-xs text-gray-500">
+                    <li><Link href="#solutions" className="hover:text-blue-500">Home</Link></li>
+                    <li><Link href="#solutions" className="hover:text-blue-500">Solutions</Link></li>
+                    <li><Link href="#features" className="hover:text-blue-500">Features</Link></li>
+                    <li><Link href="#cta" className="hover:text-blue-500">Get Started</Link></li>
+                 </ul>
+              </div>
 
-          <div>
-            <div className="font-display text-[13px] font-bold tracking-[1px] uppercase text-gray-900 mb-5">Navigation</div>
-            <ul className="flex flex-col gap-3">
-              <li><Link href="#solutions" className="text-sm text-gray-500 hover:text-[#5384CD] transition-colors font-medium">Solutions</Link></li>
-              <li><Link href="#features" className="text-sm text-gray-500 hover:text-[#5384CD] transition-colors font-medium">Features</Link></li>
-              <li><Link href="#roles" className="text-sm text-gray-500 hover:text-[#5384CD] transition-colors font-medium">Role Access</Link></li>
-              <li><Link href="#reports" className="text-sm text-gray-500 hover:text-[#5384CD] transition-colors font-medium">Reports</Link></li>
-              <li><Link href="#cta" className="text-sm text-gray-500 hover:text-[#5384CD] transition-colors font-medium">Try Free</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <div className="font-display text-[13px] font-bold tracking-[1px] uppercase text-gray-900 mb-5">Contact</div>
-            <div className="flex gap-2.5 mb-3 text-[13px] text-gray-500 font-medium">
-              <span className="text-[#5384CD] shrink-0 mt-[1px]">📞</span>
-              <span className="leading-[1.5]">
-                <a href="tel:+917829401605" className="hover:text-[#5384CD] block">+91-7829401605</a>
-                <a href="tel:+916261743903" className="hover:text-[#5384CD] block">+91-6261743903</a>
-              </span>
-            </div>
-            <div className="flex gap-2.5 mb-3 text-[13px] text-gray-500 font-medium">
-              <span className="text-[#5384CD] shrink-0 mt-[1px]">✉️</span>
-              <span className="leading-[1.5]">
-                <a href="mailto:anshu@evdtechnology.com" className="hover:text-[#5384CD]">anshu@evdtechnology.com</a>
-              </span>
-            </div>
-            <div className="flex gap-2.5 mb-3 text-[13px] text-gray-500 font-medium">
-              <span className="text-[#5384CD] shrink-0 mt-[1px]">🌐</span>
-              <span className="leading-[1.5]">
-                <a href="https://www.evdtechnology.com" target="_blank" className="hover:text-[#5384CD]">www.evdtechnology.com</a>
-              </span>
-            </div>
-            <div className="flex gap-2.5 mb-3 text-[13px] text-gray-500 font-medium">
-              <span className="text-[#5384CD] shrink-0 mt-[1px]">📍</span>
-              <span className="leading-[1.5]">Korba & Raipur, Chhattisgarh, India</span>
-            </div>
-          </div>
+              <div>
+                 <h4 className="font-bold text-sm text-gray-900 mb-4">Contact</h4>
+                 <div className="text-xs text-gray-500 space-y-4">
+                    <div>
+                       <div className="text-[10px] font-bold text-gray-400 mb-1 uppercase">Call Us</div>
+                       <a href="tel:+917829401605" className="block hover:text-blue-500 font-medium text-gray-900">+91-7829401605</a>
+                       <a href="tel:+916261743903" className="block hover:text-blue-500 font-medium text-gray-900">+91-6261743903</a>
+                    </div>
+                    <div>
+                       <div className="text-[10px] font-bold text-gray-400 mb-1 uppercase">Email Us</div>
+                       <a href="mailto:anshu@evdtechnology.com" className="hover:text-blue-500 font-medium text-gray-900">anshu@evdtechnology.com</a>
+                    </div>
+                    <div>
+                       <div className="text-[10px] font-bold text-gray-400 mb-1 uppercase">Visit Us</div>
+                       <span className="block">Korba & Raipur, Chhattisgarh, India</span>
+                    </div>
+                 </div>
+              </div>
+           </div>
         </div>
-
-        <div className="pt-6 flex justify-between items-center flex-wrap gap-3 text-[12px] text-gray-400 font-medium">
-          <span>© 2025 EVD Technology LLP. All rights reserved.</span>
-          <span>OfficeBook — Attendance · Salary · Billing · Expenses</span>
+        
+        <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-400">
+           <p>© 2025 EVD Technology LLP. All rights reserved.</p>
+           <p>OfficeBook — Attendance · Salary · Billing · Expenses</p>
         </div>
       </footer>
     </main>
