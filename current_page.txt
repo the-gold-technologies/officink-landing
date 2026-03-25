@@ -1,0 +1,221 @@
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+
+function useReveal() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((el) => {
+          if (el.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(el.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible };
+}
+
+const Reveal = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
+  const { ref, isVisible } = useReveal();
+  return (
+    <div
+      ref={ref as any}
+      className={`transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      } ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
+
+export default function Home() {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <main className="min-h-screen font-body selection:bg-brand-teal selection:text-white">
+      {/* NAV */}
+      <nav className="absolute top-0 left-0 right-0 z-[100] flex items-center justify-between px-[6vw] h-[80px] bg-transparent">
+        <Link href="#" className="flex items-center gap-2 no-underline">
+          <img src="/fulllogo_transparent.png" alt="Patungans Logo" className="h-[100px] w-auto object-contain" />
+        </Link>
+        <div className="hidden md:flex items-center gap-10">
+          <Link href="#service" className="text-gray-500 text-[15px] hover:text-gray-900 transition-colors">Service</Link>
+          <Link href="#product" className="text-gray-500 text-[15px] hover:text-gray-900 transition-colors">Product</Link>
+          <Link href="#blog" className="text-gray-500 text-[15px] hover:text-gray-900 transition-colors">Blog</Link>
+          <Link href="#about" className="text-gray-500 text-[15px] hover:text-gray-900 transition-colors">About Us</Link>
+        </div>
+        <div className="hidden sm:block">
+          <Link href="#cta" className="bg-[#1f2229] text-white font-medium text-[14px] py-3 px-6 rounded-xl hover:bg-black transition-all">
+            Get a Demo
+          </Link>
+        </div>
+      </nav>
+
+      {/* HERO */}
+      <section id="hero" className="min-h-[100vh] grid grid-cols-1 lg:grid-cols-2 items-center gap-10 px-[6vw] pt-[150px] pb-20 relative overflow-hidden bg-[#F5F7F8]">
+        <div className="relative z-10 lg:pr-10">
+          <h1 className="font-display text-[clamp(2.8rem,5vw,4.5rem)] font-medium leading-[1.1] tracking-tight mb-6 text-gray-900">
+            Plan joint ventures for <br className="hidden md:block" /> desired targets
+          </h1>
+
+          <p className="text-gray-500 text-[1.1rem] leading-[1.6] max-w-[500px] mb-8 font-normal">
+            when an unknown printer took a galley of type and script to make a type specimen book.
+          </p>
+
+          <div className="flex items-center gap-3 mb-14 cursor-pointer group w-max">
+            <div className="w-[44px] h-[44px] rounded-full bg-[#E5F5E4] flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-[#36B626] border-b-[6px] border-b-transparent ml-1"></div>
+            </div>
+            <span className="text-gray-700 font-medium text-[15px] group-hover:text-gray-900 transition-colors">Introducing about us</span>
+          </div>
+
+          <div>
+            <p className="text-[13px] font-medium text-gray-900 mb-4 ml-1">Available for download :</p>
+            <div className="flex flex-wrap gap-4">
+              <button className="bg-[#242730] text-white rounded-2xl p-[12px_24px] flex items-center gap-3 hover:bg-black transition-colors w-[180px]">
+                <svg className="w-[22px] h-[22px] fill-current" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.86 3.59-.76 1.54.12 2.65.65 3.32 1.6-3.13 1.87-2.6 5.96.48 7.34-.78 1.93-1.63 3.19-2.47 3.99zm-3.22-14.3c-.06-1.57.85-2.97 1.87-3.79-.82-1.41-2.64-1.68-3.23-1.68-1.59.08-3.02 1.15-3.08 2.76 0 1.63.92 2.94 2.1 3.73.66.45 1.56.78 2.37.76.01-.58-.03-1.19-.03-1.78z" /></svg>
+                <div className="text-left">
+                  <div className="text-[10px] text-white/70 leading-none mb-1">App Store</div>
+                  <div className="text-[12px] font-semibold leading-none">For iOS & MacOS</div>
+                </div>
+              </button>
+              
+              <button className="bg-[#3A3D46] text-white rounded-2xl p-[12px_24px] flex items-center gap-3 hover:bg-[#2A2D36] transition-colors w-[180px]">
+                <svg className="w-[20px] h-[20px] fill-current" viewBox="0 0 24 24"><path d="M3 22.073c-.022 0-.045.003-.067.003a.545.545 0 01-.137-.017C2.269 21.844 2 21.365 2 20.655V3.344C2 2.65 2.259 2.164 2.776 1.95a.653.653 0 01.196-.032C3.045 1.918 3.12 1.921 3 1.928l13.12 10.07L3 22.073zM16.897 11.23L4.985 2.13l11.912 9.1zM4.985 21.87l11.912-9.1-11.912 9.1zm12.983-9.917l2.87-2.193a.9.9 0 011.025.105c.294.257.34.693.109.972l-2.812 3.42-1.192-2.304z" /></svg>
+                <div className="text-left">
+                  <div className="text-[10px] text-white/70 leading-none mb-1">Play Store</div>
+                  <div className="text-[12px] font-semibold leading-none">For Android 4.0</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Hero Right Visuals */}
+        <div className="hidden lg:block relative z-10 w-full h-full min-h-[500px]">
+          <div className="absolute top-[5%] right-0 w-[420px] h-full flex justify-center">
+             
+             {/* Background Shape */}
+             <div className="absolute top-[40px] right-[20px] w-[350px] h-[580px] bg-[#EAF5E9] rounded-[40px] rotate-[8deg]"></div>
+             
+             {/* Happy Users Floater */}
+             <div className="absolute -top-[10px] right-[10%] bg-transparent flex items-center gap-3 z-30">
+               <div className="flex -space-x-3">
+                 <div className="w-[36px] h-[36px] rounded-full bg-gray-300 border-2 border-white overflow-hidden"><img src="https://i.pravatar.cc/100?img=1" alt="user" className="w-full h-full object-cover"/></div>
+                 <div className="w-[36px] h-[36px] rounded-full bg-gray-300 border-2 border-white overflow-hidden"><img src="https://i.pravatar.cc/100?img=2" alt="user" className="w-full h-full object-cover"/></div>
+                 <div className="w-[36px] h-[36px] rounded-full bg-gray-300 border-2 border-white overflow-hidden"><img src="https://i.pravatar.cc/100?img=3" alt="user" className="w-full h-full object-cover"/></div>
+               </div>
+               <div>
+                 <div className="font-bold text-[18px] text-gray-900 leading-tight">1.5M +</div>
+                 <div className="text-[12px] text-gray-500 leading-tight">Happy Users</div>
+               </div>
+             </div>
+
+             {/* Phone 1 (Back) */}
+             <div className="absolute top-[80px] right-[-20px] w-[260px] h-[520px] bg-white rounded-[35px] border-[8px] border-gray-900 shadow-2xl overflow-hidden z-10 flex flex-col">
+                <div className="p-5 pt-8 bg-white border-b border-gray-100 flex-1">
+                  <div className="w-full h-[80px] rounded-xl bg-gray-50 mb-3 p-3">
+                    <div className="text-[10px] text-gray-400">Statistics</div>
+                    <div className="text-[18px] font-bold text-gray-900 mt-1">$125,73</div>
+                  </div>
+                  <div className="w-full h-[120px] rounded-xl bg-gradient-to-t from-[#EAF5E9] to-transparent relative mb-3">
+                    <svg className="absolute bottom-0 w-full h-full" viewBox="0 0 100 50" preserveAspectRatio="none"><path d="M0,50 L0,30 Q25,10 50,25 T100,10 L100,50 Z" fill="#D3F5D1" opacity="0.5"/><path d="M0,50 L0,40 Q25,20 50,35 T100,20 L100,50 Z" fill="#A3E69D"/></svg>
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="flex-1 h-[60px] bg-gray-50 rounded-xl"></div>
+                    <div className="flex-1 h-[60px] bg-gray-50 rounded-xl"></div>
+                  </div>
+                </div>
+             </div>
+
+             {/* Phone 2 (Front) */}
+             <div className="absolute top-[40px] left-[0px] w-[260px] h-[520px] bg-white rounded-[35px] border-[8px] border-gray-900 shadow-2xl overflow-hidden z-20 flex flex-col">
+                <div className="p-5 pt-8 bg-white flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden"><img src="https://i.pravatar.cc/100?img=4" alt="user" className="w-full h-full object-cover"/></div>
+                    <div>
+                      <div className="text-[10px] text-gray-400">Hello,</div>
+                      <div className="text-[13px] font-bold text-gray-900">Welcome Back!</div>
+                    </div>
+                  </div>
+                  
+                  <div className="w-full bg-[#82D479] rounded-2xl p-4 text-white mb-5 relative overflow-hidden">
+                    <div className="absolute -right-[20px] -top-[20px] w-[100px] h-[100px] bg-white/10 rounded-full blur-xl"></div>
+                    <div className="text-[10px] text-white/80 mb-1">Accumulated Balance</div>
+                    <div className="font-bold text-[22px] mb-3">$529,73</div>
+                    <div className="flex justify-between text-[10px] text-white/90">
+                      <span>50%</span>
+                      <span>$529,73 / $1250.00</span>
+                    </div>
+                  </div>
+
+                  <div className="mb-2 flex justify-between items-center">
+                    <div className="text-[12px] font-bold text-gray-900">Your Friends</div>
+                    <div className="text-[10px] text-gray-400">See All</div>
+                  </div>
+                  
+                  <div className="flex justify-between mb-5">
+                    <div className="w-8 h-8 rounded-full bg-gray-100 overflow-hidden"><img src="https://i.pravatar.cc/100?img=5" alt="user" className="w-full h-full object-cover"/></div>
+                    <div className="w-8 h-8 rounded-full bg-gray-100 overflow-hidden"><img src="https://i.pravatar.cc/100?img=6" alt="user" className="w-full h-full object-cover"/></div>
+                    <div className="w-8 h-8 rounded-full bg-gray-100 overflow-hidden"><img src="https://i.pravatar.cc/100?img=7" alt="user" className="w-full h-full object-cover"/></div>
+                    <div className="w-8 h-8 rounded-full bg-gray-100 overflow-hidden"><img src="https://i.pravatar.cc/100?img=8" alt="user" className="w-full h-full object-cover"/></div>
+                  </div>
+                  
+                  <div className="text-[12px] font-bold text-gray-900 mb-2">Recent Activity</div>
+                  <div className="flex-1 bg-gray-50 rounded-xl"></div>
+                </div>
+             </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* KEY SOLUTIONS */}
+      <section id="solutions" className="bg-ink2 border-y border-line py-[110px] px-[6vw] max-sm:py-[70px]">
+        <div className="inline-flex items-center gap-[7px] bg-brand-teal/10 border border-brand-teal/25 text-brand-teal text-[11px] font-bold tracking-[2px] uppercase py-1.5 px-3.5 rounded-full mb-5">
+          <span className="w-[5px] h-[5px] bg-brand-teal rounded-full animate-blink"></span>Key Solutions
+        </div>
+        <Reveal>
+          <h2 className="font-display text-[clamp(1.9rem,3vw,2.6rem)] font-black tracking-[-1px] mb-12">
+            Everything Your Office Runs On,<br/><span className="text-brand-teal">Centralized.</span>
+          </h2>
+        </Reveal>
+
+        <Reveal>
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-[1px] bg-line border border-line rounded-[20px] overflow-hidden">
+            {[
+              { icon: "🖥️", title: "Centralized Dashboard", desc: "Manage all office operations — attendance, payroll, billing, and expenses — from one unified admin panel." },
+              { icon: "📍", title: "Attendance Tracking", desc: "Location-verified selfie capture with login and logout timestamps. Tamper-proof and accurate every shift." },
+              { icon: "💰", title: "Automated Salary Calculation", desc: "Salary auto-computed from attendance records, overtime hours, and approved leaves. Zero manual errors." },
+              { icon: "🗓️", title: "Leave Management", desc: "Employees request leaves via app. Managers approve instantly. Full history and holiday calendar included." },
+              { icon: "📋", title: "Quotation Creation", desc: "Generate customizable quotations with GST support in seconds. Professional formats ready to send." },
+              { icon: "🧾", title: "Invoice Generation", desc: "Create GST-compliant invoices and track payment status — paid, pending, or overdue — at a glance." },
+              { icon: "💳", title: "Expense Recording", desc: "Log travel, office, utility, and miscellaneous expenses with category tags. Real-time budget tracking." },
+              { icon: "📊", title: "Employee-wise Reports", desc: "Downloadable reports per employee for attendance, salary, and expenses. Ready for audits and compliance." },
+              { icon: "🔐", title: "Role-Based Access", desc: "Separate access for Admin, HR, and Accounts. Each role sees exactly what they need — nothing more." },
+            ].map((sol, i) => (
+              <div key={i} className="bg-ink2 p-[32px_28px] relative group hover:bg-ink3 transition-colors duration-250">
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-teal to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-250"></div>
+                <div className="w-[44px] h-[44px] rounded-xl bg-brand-teal/10 border border-brand-teal/20 flex items-center justify-center text-xl mb-3.5">
+                  {sol.icon}
+                </div>
+                <h4 className="font-display text-[0.95rem] font-bold mb-2 leading-snug">{sol.title}</h4>
+                <p className="text-[0.825rem] text-slate leading-[1.65]">{sol.desc}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+

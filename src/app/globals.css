@@ -1,26 +1,65 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ink: #0B0F1A;
+  --color-ink2: #111827;
+  --color-ink3: #1C2537;
+  --color-brand-teal: #00C6A7;
+  --color-teal2: #00A88D;
+  --color-amber: #F5A623;
+  --color-red: #FF5E5E;
+  --color-white: #FFFFFF;
+  --color-slate: #94A3B8;
+  --color-card: #141C2E;
+  --color-line: rgba(255, 255, 255, 0.07);
+  --font-display: var(--font-epilogue), sans-serif;
+  --font-body: var(--font-plus-jakarta), sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FFFFFF;
+    --foreground: #111827;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+@keyframes blink { 
+  0%, 100% { opacity: 1; } 
+  50% { opacity: 0.2; } 
+}
+@keyframes barUp { 
+  from { transform: scaleY(0); transform-origin: bottom; } 
+  to { transform: scaleY(1); transform-origin: top; }
+}
+@keyframes floatBob { 
+  0%, 100% { transform: translateY(0); } 
+  50% { transform: translateY(-10px); } 
+}
+
+.animate-blink { animation: blink 2s infinite; }
+.animate-floatBob { animation: floatBob 4s ease-in-out infinite; }
+.animate-barUp { animation: barUp 0.8s ease both; transform-origin: bottom; }
+
+.shadow-glow {
+  box-shadow: 0 0 60px rgba(0, 198, 167, 0.15);
+}
+
+.shadow-nav {
+  box-shadow: 0 4px 20px rgba(0, 198, 167, 0.35);
+}
+
+.shadow-cta {
+  box-shadow: 0 8px 32px rgba(0, 198, 167, 0.4);
+}
+
+.shadow-card {
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
 }
