@@ -364,9 +364,9 @@ export default function Home() {
                  {/* Web Portal Login */}
                  <div className="bg-[#1C1C1C] border border-white/10 rounded-[20px] p-6 w-[280px] text-left hover:border-white/20 transition-all">
                     <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-4">WEB PORTAL LOGIN</div>
-                    <div className="flex justify-between text-xs text-gray-400 mb-2"><span>User: </span><span className="text-white font-mono font-bold">1010101010</span></div>
-                    <div className="flex justify-between text-xs text-gray-400 mb-6"><span>Pass: </span><span className="text-white font-mono font-bold">123456789</span></div>
-                    <Link href="https://evdtechnology.com" target="_blank" className="flex items-center justify-center w-full bg-white text-black font-bold text-xs py-3 rounded-xl hover:bg-gray-200 transition-colors">
+                    <div className="flex justify-between text-xs text-gray-400 mb-2"><span>User: </span><span className="text-white font-mono font-bold">demo_user</span></div>
+                    <div className="flex justify-between text-xs text-gray-400 mb-6"><span>Pass: </span><span className="text-white font-mono font-bold">demo_pass</span></div>
+                    <Link href="https://console.officink.com" target="_blank" className="flex items-center justify-center w-full bg-white text-black font-bold text-xs py-3 rounded-xl hover:bg-gray-200 transition-colors">
                        Launch Web Portal →
                     </Link>
                  </div>
@@ -374,8 +374,8 @@ export default function Home() {
                  {/* Mobile App Login */}
                  <div className="bg-[#1C1C1C] border border-white/10 rounded-[20px] p-6 w-[280px] text-left hover:border-white/20 transition-all">
                     <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-4">MOBILE APP LOGIN</div>
-                    <div className="flex justify-between text-xs text-gray-400 mb-2"><span>User: </span><span className="text-white font-mono font-bold">7829401605</span></div>
-                    <div className="flex justify-between text-xs text-gray-400 mb-6"><span>Pass: </span><span className="text-white font-mono font-bold">123456789</span></div>
+                    <div className="flex justify-between text-xs text-gray-400 mb-2"><span>User: </span><span className="text-white font-mono font-bold">demo_mobile</span></div>
+                    <div className="flex justify-between text-xs text-gray-400 mb-6"><span>Pass: </span><span className="text-white font-mono font-bold">demo_pass</span></div>
                     <Link href="https://play.google.com" target="_blank" className="flex items-center justify-center w-full bg-transparent border border-white/20 text-white font-bold text-xs py-3 rounded-xl hover:bg-white/10 transition-colors">
                        Download App →
                     </Link>
@@ -393,7 +393,7 @@ export default function Home() {
                 <img src="/fulllogo_transparent.png" alt="Officink Logo" className="h-[90px] w-auto object-contain" /> 
               </Link>
               <p className="text-xs text-gray-500 leading-relaxed">
-                 An all-in-one office automation platform by EVD Technology LLP. Centralizing attendance, payroll, billing, and expense tracking for growing businesses.
+                 An all-in-one office automation platform by The Gold Technologies. Centralizing attendance, payroll, billing, and expense tracking for growing businesses.
               </p>
            </div>
            
@@ -413,16 +413,16 @@ export default function Home() {
                  <div className="text-xs text-gray-500 space-y-4">
                     <div>
                        <div className="text-[10px] font-bold text-gray-400 mb-1 uppercase">Call Us</div>
-                       <a href="tel:+917829401605" className="block hover:text-blue-500 font-medium text-gray-900">+91-7829401605</a>
-                       <a href="tel:+916261743903" className="block hover:text-blue-500 font-medium text-gray-900">+91-6261743903</a>
+                       <a href="tel:+918368198551" className="block hover:text-blue-500 font-medium text-gray-900">+91 8368198551</a>
                     </div>
                     <div>
                        <div className="text-[10px] font-bold text-gray-400 mb-1 uppercase">Email Us</div>
-                       <a href="mailto:anshu@evdtechnology.com" className="hover:text-blue-500 font-medium text-gray-900">anshu@evdtechnology.com</a>
+                       <a href="mailto:info@thegoldtechnologies.com" className="hover:text-blue-500 font-medium text-gray-900">info@thegoldtechnologies.com</a>
                     </div>
                     <div>
                        <div className="text-[10px] font-bold text-gray-400 mb-1 uppercase">Visit Us</div>
-                       <span className="block">Korba & Raipur, Chhattisgarh, India</span>
+                       <span className="block mb-2"><strong>INDIA:</strong> SD-369, D block, Shastri Nagar, Ghaziabad, UP, India - 201002</span>
+                       <span className="block"><strong>USA:</strong> Accessible Minds 1309- Coffeen Avenue, STE 1200 Sheridan, Wyoming- 82801, U</span>
                     </div>
                  </div>
               </div>
@@ -430,7 +430,7 @@ export default function Home() {
         </div>
         
         <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-400">
-           <p>© 2025 EVD Technology LLP. All rights reserved.</p>
+           <p>© 2026 The Gold Technologies. All rights reserved.</p>
            <p>OfficeBook — Attendance · Salary · Billing · Expenses</p>
         </div>
       </footer>
