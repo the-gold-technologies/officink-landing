@@ -525,7 +525,7 @@ export default function Home() {
         className="bg-[#FAFBFD] pt-[120px] pb-[20px] relative overflow-hidden" 
       >
 
-        <div className="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-end gap-8 px-6 md:px-0">
+        <div className="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-end gap-8 px-6 lg:px-0 md:px-20">
           <Reveal className="max-w-2xl">
             <h2 className="font-display text-[clamp(2.5rem,5.5vw,3.5rem)] font-bold text-[#101828] leading-[1.1] tracking-tighter">
               Office Automation<br />
@@ -700,7 +700,7 @@ export default function Home() {
         </Reveal>
 
         <Reveal>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-10">
             {/* Large Dark Featured Card - GPS & Selfie */}
             <div className="lg:col-span-2 group">
               <div className="relative h-[400px] overflow-hidden rounded-[40px] bg-gradient-to-br from-[#0D1B2A] via-[#132A45] to-[#0D1B2A] shadow-2xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-white/10">
@@ -721,7 +721,7 @@ export default function Home() {
 
                     <h3 className="font-display text-[2rem] font-bold text-white leading-tight">Verified Attendance</h3>
 
-                    <p className="text-slate-300 text-[1rem] leading-[1.8] font-medium max-w-[90%]">
+                    <p className="text-slate-300 text-[1rem] leading-[1.8] font-medium max-w-[95%]">
                       Location and identity-based check-ins ensure real presence not manual entries.<br />
                       Zero proxy attendance. Total staff accountability.
                     </p>
@@ -784,8 +784,8 @@ export default function Home() {
                 {/* Content */}
                 <div className="relative z-10 p-8 h-full flex flex-col justify-between">
                   <div>
-                    <h3 className="font-display text-[1.8rem] font-bold mb-4 text-gray-900">Real Inventory Tracking</h3>
-                    <p className="text-gray-600 text-[1rem] leading-[1.7] font-medium">Track actual stock movement across locations in real time. Know what’s available. Always.</p>
+                    <h3 className="font-display text-[1.8rem] font-bold max-w-[90%] mb-4 text-gray-900">Real Inventory Tracking</h3>
+                    <p className="text-gray-600 text-[1rem] leading-[1.7] font-medium max-w-[90%]">Track actual stock movement across locations in real time. Know what’s available. Always.</p>
                   </div>
 
                   {/* Visual mockup space */}
