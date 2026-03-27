@@ -15,7 +15,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-    title: "Officink - Attendance, Salary, Billing & Expenses",
+    title: "OFFICINK - Attendance, Salary, Billing & Expenses",
     description: "All-in-One Office Automation Platform",
 };
 
