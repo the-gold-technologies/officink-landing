@@ -199,7 +199,8 @@ export default function Home() {
         </div>
         <div className="hidden sm:block">
           <Link
-            href="#cta"
+            href="https://console.officink.com"
+            target="_blank"
             className="group relative isolate flex items-center justify-center gap-2 rounded-full bg-[#0B0F1A] px-5 py-2 text-[14px] font-semibold text-white shadow-[0_3px_0_#1a1f2e] transition-all duration-200 active:translate-y-[3px] active:shadow-none hover:shadow-[0_5px_0_#D1D5DB] hover:-translate-y-1 border-t border-white/10 overflow-hidden no-underline"
           >
             <span className="relative z-10 flex items-center gap-2">
@@ -230,7 +231,8 @@ export default function Home() {
           <div>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="#cta"
+                href="https://console.officink.com"
+                target="_blank"
                 className="group relative isolate flex items-center justify-center gap-2 rounded-full bg-[#0B0F1A] py-3.5 font-semibold text-white shadow-[0_4px_0_#1a1f2e] transition-all duration-200 active:translate-y-[4px] active:shadow-none hover:shadow-[0_6px_0_#D1D5DB] hover:-translate-y-1 border-t border-white/10 overflow-hidden w-[180px] no-underline"
               >
                 <span className="relative z-10 flex items-center gap-2 tracking-wide text-[16px]">
