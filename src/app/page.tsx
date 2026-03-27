@@ -117,6 +117,29 @@ const ModuleCard = ({ module, index, total }: { module: any; index: number; tota
 };
 
 export default function Home() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartX(e.pageX - (scrollRef.current?.offsetLeft || 0));
+    setScrollLeft(scrollRef.current?.scrollLeft || 0);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - (scrollRef.current?.offsetLeft || 0);
+    const walk = (x - startX) * 2;
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft = scrollLeft - walk;
+    }
+  };
+
+  const handleMouseUp = () => setIsDragging(false);
+  const handleMouseLeave = () => setIsDragging(false);
 
   return (
     <main className="min-h-screen font-body selection:bg-brand-teal selection:text-white ">
@@ -353,89 +376,271 @@ export default function Home() {
         </div>
       </section>
 
-      {/* REDESIGNED CHALLENGES SECTION (Direct Match to Image) */}
-      <section id="challenges" className="relative min-h-[850px] mx-2 w-auto rounded-[3rem] overflow-hidden flex flex-col justify-center px-[6vw] py-24">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=100" 
-            alt="Office Team" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/55 backdrop-blur-[1px]" />
+      {/* OPERATIONAL CHALLENGES SECTION */}
+      <section id="operational-challenges" className="bg-[#050511] py-[120px] px-[6vw] relative overflow-hidden m-1 rounded-[3rem]">
+        {/* Decorative Background Text */}
+        <div className="absolute top-[80px] left-1/2 -translate-x-1/2 select-none pointer-events-none opacity-[0.03]">
+          <span className="font-display font-black text-[clamp(6rem,15vw,10rem)] text-white uppercase tracking-tighter">
+            GAPS
+          </span>
         </div>
 
-        <Reveal className="relative z-10 max-w-7xl mx-auto w-full flex flex-col h-full text-center lg:text-left">
-          <div className="mb-16 md:mb-20">
-            <h2 className="font-display text-[clamp(2.5rem,5.5vw,3.5rem)] font-bold text-white leading-[1.1] mb-5 tracking-tight">
-              Scale faster, and finally<br/>
-              automate your <span className="text-transparent italic font-serif bg-clip-text bg-gradient-to-r from-[#5384CD] to-[#3AC6F5]">office operations</span>
+        {/* Dynamic Glows */}
+        <div className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-[#5384CD]/10 blur-[150px] rounded-full pointer-events-none"></div>
+        <div className="absolute bottom-1/4 -left-20 w-[600px] h-[600px] bg-[#3AC6F5]/10 blur-[150px] rounded-full pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <Reveal className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm mb-6">
+              <span className="text-[#3AC6F5] text-[10px] font-bold uppercase tracking-[0.2em]">The Silent Problem</span>
+            </div>
+            <h2 className="font-display text-[clamp(2.2rem,5vw,3.5rem)] font-bold text-white leading-[1.1] mb-6 tracking-tight max-w-4xl mx-auto">
+              Most operational problems don’t start with <span className="italic font-serif text-transparent bg-clip-text bg-gradient-to-r from-[#5384CD] to-[#3AC6F5]">big failures.</span>
             </h2>
-            <p className="text-white/80 text-[1rem] font-medium tracking-wide">What makes us special:</p>
-          </div>
+            <p className="text-gray-400 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
+              They start with small gaps no one can clearly track.
+            </p>
+          </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-10 gap-6 items-end mt-auto">
-            {/* Main Specialty Card (Now matches Blue/Teal Theme) */}
-            <div className="lg:col-span-4 group">
-              <div className="bg-gradient-to-br from-[#F0F9FF] to-[#E0F2FE] rounded-[48px] p-10 h-[340px] flex flex-col justify-between shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#5384CD] to-[#3AC6F5] rounded-[22px] flex items-center justify-center shadow-lg">
-                  <svg className="w-9 h-9 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {[
+              {
+                title: "Manual record keeping errors",
+                desc: "Paper chains and local spreadsheets lead to data loss and unreliable metrics.",
+                color: "from-[#10B981] to-[#059669]",
+                shadow: "shadow-emerald-500/20",
+                icon: (
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
-                </div>
-                <div>
-                  <h3 className="text-[#101828] text-[2.25rem] font-bold leading-[1.1] mb-10 tracking-tight">
-                    Works on<br/>GPS tracking system
+                )
+              },
+              {
+                title: "Inefficient quotation & billing",
+                desc: "Delayed invoices and manual quotations slow down your entire cash flow cycle.",
+                color: "from-[#84CC16] to-[#65A30D]",
+                shadow: "shadow-lime-500/20",
+                icon: (
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                )
+              },
+              {
+                title: "Inaccurate attendance tracking",
+                desc: "Proxy attendance and time theft result in massive payroll leakage every year.",
+                color: "from-[#0EA5E9] to-[#0284C7]",
+                shadow: "shadow-sky-500/20",
+                icon: (
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                )
+              },
+              {
+                title: "Security risks from access",
+                desc: "Unverified access to office resources creates hidden vulnerabilities in your operations.",
+                color: "from-[#8B5CF6] to-[#7C3AED]",
+                shadow: "shadow-purple-500/20",
+                icon: (
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                )
+              },
+              {
+                title: "Inventory loss & theft",
+                desc: "Unmanaged stock levels and missing assets strain finances and disrupt daily flow.",
+                color: "from-[#F59E0B] to-[#D97706]",
+                shadow: "shadow-amber-500/20",
+                icon: (
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  </svg>
+                )
+              },
+              {
+                title: "Slow & complicated reporting",
+                desc: "Waiting days for reports means you're always making decisions on old data.",
+                color: "from-[#F43F5E] to-[#E11D48]",
+                shadow: "shadow-rose-500/20",
+                icon: (
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                )
+              }
+            ].map((gap, i) => (
+              <Reveal key={i} className="group relative">
+                <div className={`h-full p-8 rounded-[32px] bg-white/[0.03] border border-white/10 backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:border-white/20 hover:bg-white/[0.05] flex flex-col`}>
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${gap.color} flex items-center justify-center text-white mb-8 shadow-lg ${gap.shadow} group-hover:scale-110 transition-transform duration-500`}>
+                    {gap.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3 leading-tight tracking-tight">
+                    {gap.title}
                   </h3>
-                  <button className="bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] text-white px-9 py-3.5 rounded-2xl font-bold text-sm transition-all hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/20">
-                    Try It Now
-                  </button>
+                  <p className="text-gray-400 text-[0.95rem] leading-relaxed font-medium">
+                    {gap.desc}
+                  </p>
+                  
+                  {/* Bottom accent line */}
+                  <div className={`mt-auto pt-6`}>
+                    <div className={`h-1 w-0 group-hover:w-16 bg-gradient-to-r ${gap.color} rounded-full transition-all duration-500`}></div>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Compliance Card (White with Blue Tint) */}
-            <div className="lg:col-span-3 group">
-              <div className="bg-white rounded-[40px] p-10 h-[260px] flex flex-col justify-between relative overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 border border-blue-50/50">
-                {/* Background Pattern - Soft Sky Circle */}
-                <div className="absolute top-[-30px] right-[-30px] w-64 h-64 bg-[#F0F9FF] rounded-full opacity-60 pointer-events-none" />
-                
-                <div className="w-14 h-14 bg-gradient-to-br from-[#5384CD] to-[#3AC6F5] rounded-[20px] flex items-center justify-center relative z-10 shadow-sm border-4 border-white">
-                  <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                </div>
-                <h3 className="text-[#101828] text-[1.5rem] font-bold leading-[1.2] relative z-10 tracking-tight">
-                  100% compliant<br/>with all regulations
-                </h3>
-              </div>
-            </div>
-
-            {/* Setup Card (White with Blue Tint) */}
-            <div className="lg:col-span-3 group">
-              <div className="bg-white rounded-[40px] p-10 h-[260px] flex flex-col justify-between relative overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 border border-blue-50/50">
-                {/* Background Pattern - Soft Indigo Circle */}
-                <div className="absolute top-[-30px] right-[-30px] w-64 h-64 bg-[#EEF2FF] rounded-full opacity-80 pointer-events-none" />
-
-                <div className="w-14 h-14 bg-gradient-to-br from-[#5384CD] to-[#3AC6F5] rounded-[20px] flex items-center justify-center relative z-10 shadow-sm border-4 border-white">
-                  <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                  </svg>
-                </div>
-                <h3 className="text-[#101828] text-[1.5rem] font-bold leading-[1.2] relative z-10 tracking-tight">
-                  Done-for-you<br/>setup
-                </h3>
-              </div>
-            </div>
-
+              </Reveal>
+            ))}
           </div>
-
-
-        </Reveal>
+        </div>
       </section>
 
+      {/* SOLUTIONS CAROUSEL SECTION */}
+      <section 
+        id="solutions" 
+        className="bg-[#FAFBFD] pt-[120px] pb-[20px] relative overflow-hidden" 
+      >
 
+        <div className="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-end gap-8 px-6 md:px-0">
+          <Reveal className="max-w-2xl">
+            <h2 className="font-display text-[clamp(2.5rem,5.5vw,3.5rem)] font-bold text-[#101828] leading-[1.1] tracking-tighter">
+              Office Automation<br />
+              <span className="italic font-serif text-transparent bg-clip-text bg-gradient-to-r from-[#5384CD] to-[#3AC6F5]">You Can Trust</span>
+            </h2>
+          </Reveal>
+          <Reveal className="md:w-1/3 text-right">
+            <p className="text-gray-500 text-lg font-medium leading-relaxed">
+              We provide a wide range of office tools. Covering all of your operational needs.
+            </p>
+          </Reveal>
+        </div>
+
+        {/* Carousel Container - Aligned exactly with the header above */}
+        <div className="pl-6 md:pl-[max(1.5rem,calc((100vw-1280px)/2))]">
+          <div 
+            ref={scrollRef}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
+            className={`flex gap-6 overflow-x-auto pt-10 pb-24 pr-12 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isDragging ? 'cursor-grabbing select-none scroll-auto !snap-none' : 'cursor-grab scroll-smooth'}`}
+            style={{ scrollSnapType: isDragging ? 'none' : 'x mandatory' }}
+          >
+            {[
+              {
+                title: "Attendance Tracking",
+                label: "Attendance",
+                desc: "GPS & Selfie verification ensuring 100% staff accountability and zero time theft.",
+                color: "from-blue-50 to-white",
+                accent: "text-blue-500",
+                icon: (
+                  <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                )
+              },
+              {
+                title: "Automated Payroll",
+                label: "Calculations",
+                desc: "Zero-effort salary processing that syncs attendance, overtime, and leaves automatically.",
+                color: "from-emerald-50 to-white",
+                accent: "text-emerald-500",
+                icon: (
+                  <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )
+              },
+              {
+                title: "GST Smart Billing",
+                label: "Invoicing",
+                desc: "Generate professional pro-invoices and quotations in under 30 seconds with GST compliance.",
+                color: "from-slate-100 to-white",
+                accent: "text-slate-600",
+                icon: (
+                  <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                )
+              },
+              {
+                title: "Expense Management",
+                label: "Finance",
+                desc: "Complete financial transparency with digital receipt recording and real-time expense analytics.",
+                color: "from-amber-50 to-white",
+                accent: "text-amber-500",
+                icon: (
+                  <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                )
+              },
+              {
+                title: "Smart Leave Flow",
+                label: "Management",
+                desc: "Mobile-first leave requests and admin approvals for a faster, paperless office culture.",
+                color: "from-purple-50 to-white",
+                accent: "text-purple-500",
+                icon: (
+                  <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                )
+              },
+              {
+                title: "Unified Dashboard",
+                label: "Admin Console",
+                desc: "Real-time visibility into every operational metric from one centralized command center.",
+                color: "from-sky-50 to-white",
+                accent: "text-[#3AC6F5]",
+                icon: (
+                  <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                )
+              }
+            ].map((sol, i) => (
+              <div key={i} className="min-w-[280px] md:min-w-[340px] snap-start">
+                <div className={`group relative h-[370px] w-full rounded-[40px] p-8 bg-gradient-to-br ${sol.color} border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col`}>
+                  
+                  {/* Top Header */}
+                  <div className="flex justify-between items-start mb-8">
+                    <div className={`p-3.5 rounded-2xl bg-white shadow-sm border border-gray-50 transition-transform group-hover:scale-110 duration-500 ${sol.accent}`}>
+                      <div className="w-7 h-7">
+                        {sol.icon}
+                      </div>
+                    </div>
+                    <div className="px-4 py-1.5 rounded-xl bg-white shadow-sm border border-gray-50 text-[10px] font-bold text-gray-400 uppercase tracking-widest backdrop-blur-md">
+                      {sol.label}
+                    </div>
+                  </div>
+
+                  {/* Body Content */}
+                  <div className="mt-auto">
+                    <h3 className="text-2xl font-bold text-[#101828] mb-4 tracking-tight leading-tight min-h-[3.5rem] flex items-end">
+                      {sol.title}
+                    </h3>
+                    <p className="text-gray-500 text-[0.88rem] leading-relaxed font-medium mb-8 max-w-[95%] min-h-[4.2rem]">
+                      {sol.desc}
+                    </p>
+                    
+                    {/* Circle Link */}
+                    <div className="w-12 h-12 rounded-full bg-white border border-gray-100 flex items-center justify-center text-[#5384CD] shadow-lg group-hover:bg-[#101828] group-hover:text-white transition-all duration-300">
+                      <svg className="w-5 h-5 transform rotate-[-45deg] group-hover:rotate-0 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Soft Background Accent */}
+                  <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/30 blur-[50px] rounded-full pointer-events-none group-hover:bg-white transition-colors duration-500"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* FEATURES DEEP DIVE (Bento Grid) */}
       <section id="features" className="bg-gradient-to-b from-white to-gray-50 py-[100px] px-[6vw] relative overflow-hidden">
@@ -452,13 +657,13 @@ export default function Home() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3AC6F5] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#5384CD]"></span>
             </span>
-            <span className="text-[#5384CD] text-[10px] font-bold uppercase tracking-[0.2em]">Platform Capabilities</span>
+            <span className="text-[#5384CD] text-[10px] font-bold uppercase tracking-[0.2em]">Core Features</span>
           </div>
           
           <h2 className="font-display text-[clamp(2.5rem,5.5vw,3.5rem)] font-bold text-[#101828] leading-[1.1] mb-6 tracking-tighter max-w-4xl mx-auto">
-            Everything you need,<br />
+            Built for How <br />
             <span className="italic font-serif mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] pr-2">
-              Nothing you don't.
+              Real Businesses Operate
             </span>
           </h2>
           
@@ -487,9 +692,12 @@ export default function Home() {
                       </svg>
                     </div>
 
-                    <h3 className="font-display text-[2rem] font-bold text-white leading-tight">GPS & Selfie Attendance</h3>
+                    <h3 className="font-display text-[2rem] font-bold text-white leading-tight">Verified Attendance</h3>
 
-                    <p className="text-slate-300 text-[1rem] leading-[1.8] font-medium max-w-[90%]">Eliminate time theft. Employees must be at the office location to check in. Selfie verification adds an extra layer of security.</p>
+                    <p className="text-slate-300 text-[1rem] leading-[1.8] font-medium max-w-[90%]">
+                      Location and identity-based check-ins ensure real presence not manual entries.<br />
+                      Zero proxy attendance. Total staff accountability.
+                    </p>
                   </div>
 
                   {/* Right side - Phone Mockup */}
@@ -534,7 +742,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Auto Payroll Card - Light */}
+            {/* Real Inventory Tracking Card - Light */}
             <div className="group">
               <div className="relative h-[400px] overflow-hidden rounded-[32px] shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-gray-100">
                 <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
@@ -542,60 +750,37 @@ export default function Home() {
                 {/* Premium Icon Box */}
                 <div className="absolute top-8 right-8 w-14 h-14 bg-gradient-to-br from-[#5384CD] to-[#3AC6F5] rounded-[22px] flex items-center justify-center shadow-lg border-4 border-white z-20 transition-transform group-hover:rotate-12 duration-500">
                   <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                   </svg>
                 </div>
 
                 {/* Content */}
                 <div className="relative z-10 p-8 h-full flex flex-col justify-between">
                   <div>
-                    <h3 className="font-display text-[1.8rem] font-bold mb-4 text-gray-900">Auto Payroll</h3>
-                    <p className="text-gray-600 text-[1rem] leading-[1.7] font-medium">Zero manual calculation. Attendance + Overtime + Leaves = Final Salary.</p>
+                    <h3 className="font-display text-[1.8rem] font-bold mb-4 text-gray-900">Real Inventory Tracking</h3>
+                    <p className="text-gray-600 text-[1rem] leading-[1.7] font-medium">Track actual stock movement across locations in real time. Know what’s available. Always.</p>
                   </div>
 
-                  {/* Breakdown section */}
-                  <div className="space-y-4 bg-gray-50 rounded-2xl p-6 border border-gray-200">
-                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wide">Payroll Breakdown</div>
-                    <div className="space-y-3 text-sm">
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-600">Basic Salary</span>
-                        <span className="font-bold text-gray-900">₹25,000</span>
-                      </div>
-                      <div className="flex justify-between items-center text-emerald-600">
-                        <span>+ Overtime (4h)</span>
-                        <span className="font-bold">₹1,200</span>
-                      </div>
-                      <div className="border-t border-gray-300 pt-3 flex justify-between items-center">
-                        <span className="font-bold text-gray-900">Total Payout</span>
-                        <span className="font-bold text-gray-900 text-base">₹26,200</span>
-                      </div>
+                  {/* Visual mockup space */}
+                  <div className="space-y-3 bg-gray-50 rounded-2xl p-6 border border-gray-200 mt-4">
+                    <div className="flex justify-between items-center pb-2 border-b border-gray-100">
+                      <span className="text-gray-400 text-xs">SKU-4829</span>
+                      <span className="text-emerald-500 text-xs font-bold">In Stock</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-700 text-sm font-medium">Warehouse A</span>
+                      <span className="text-gray-900 font-bold">142 Units</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-700 text-sm font-medium">Main Store</span>
+                      <span className="text-gray-900 font-bold">58 Units</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Small Cards - Bottom Row */}
-            {/* Smart Leaves */}
-            <div className="group">
-              <div className="relative h-[220px] overflow-hidden rounded-[28px] shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-gray-100">
-                <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
-
-                <div className="relative z-10 p-6 h-full flex flex-col justify-between">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#5384CD] to-[#3AC6F5] rounded-[18px] flex items-center justify-center shadow-md border-4 border-white transition-transform group-hover:scale-110 duration-500">
-                    <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-display text-[1.25rem] font-bold text-gray-900 mb-2.5">Smart Leaves</h3>
-                    <p className="text-gray-600 text-[0.92rem] leading-relaxed">App-based requests with real-time notifications for admins. Simplify your entire leave approval workflow instantly.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* GST Billing */}
+            {/* Order to Invoice Flow - Light */}
             <div className="group">
               <div className="relative h-[220px] overflow-hidden rounded-[28px] shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-gray-100">
                 <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
@@ -607,14 +792,14 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-display text-[1.25rem] font-bold text-gray-900 mb-2.5">GST Billing</h3>
-                    <p className="text-gray-600 text-[0.92rem] leading-relaxed">Generate pro GST-compliant invoices in under 30 seconds. Manage client billing, taxes, and status in one place.</p>
+                    <h3 className="font-display text-[1.25rem] font-bold text-gray-900 mb-2.5">Order to Invoice Flow</h3>
+                    <p className="text-gray-600 text-[0.85rem] leading-relaxed">Orders, invoices, and collections connected in one system. No more fragmented records.</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Expenses */}
+            {/* Payment Visibility - Light */}
             <div className="group">
               <div className="relative h-[220px] overflow-hidden rounded-[28px] shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-gray-100">
                 <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
@@ -622,12 +807,32 @@ export default function Home() {
                 <div className="relative z-10 p-6 h-full flex flex-col justify-between">
                   <div className="w-12 h-12 bg-gradient-to-br from-[#5384CD] to-[#3AC6F5] rounded-[18px] flex items-center justify-center shadow-md border-4 border-white transition-transform group-hover:scale-110 duration-500">
                     <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-display text-[1.25rem] font-bold text-gray-900 mb-2.5">Expenses</h3>
-                    <p className="text-gray-600 text-[0.92rem] leading-relaxed">Track every rupee spent on office needs and maintenance. Complete transparency with digital receipts and analytics.</p>
+                    <h3 className="font-display text-[1.25rem] font-bold text-gray-900 mb-2.5">Payment Visibility</h3>
+                    <p className="text-gray-600 text-[0.85rem] leading-relaxed">See what’s billed, collected, pending, and overdue instantly.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Operational Clarity - Light */}
+            <div className="group">
+              <div className="relative h-[220px] overflow-hidden rounded-[28px] shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-gray-100">
+                <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
+
+                <div className="relative z-10 p-6 h-full flex flex-col justify-between">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#5384CD] to-[#3AC6F5] rounded-[18px] flex items-center justify-center shadow-md border-4 border-white transition-transform group-hover:scale-110 duration-500">
+                    <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-display text-[1.25rem] font-bold text-gray-900 mb-2.5">Operational Clarity</h3>
+                    <p className="text-gray-600 text-[0.85rem] leading-relaxed">Make decisions using real activity data instead of assumptions.</p>
                   </div>
                 </div>
               </div>
@@ -752,14 +957,14 @@ export default function Home() {
 
               <div className="flex items-center gap-4 py-6 border-t border-white/10">
                 <div className="flex -space-x-4">
-                  {[1, 2, 3, 4].map((i) => (
+                  {["Face 1.png", "face 2.png", "Face 3.png"].map((img, i) => (
                     <div key={i} className="w-10 h-10 rounded-full border-2 border-[#050511] bg-gray-600 flex items-center justify-center text-[10px] font-bold overflow-hidden shadow-lg">
-                      <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="user" className="w-full h-full object-cover" />
+                      <img src={`/face/${img}`} alt="user" className="w-full h-full object-cover" />
                     </div>
                   ))}
                 </div>
                 <div>
-                  <div className="text-white font-bold text-sm">Trusted by 500+ Teams</div>
+                  <div className="text-white font-bold text-sm">Trusted by 50+ Teams</div>
                   <div className="text-gray-500 text-xs">Industry-standard security & support</div>
                 </div>
               </div>
@@ -828,8 +1033,8 @@ export default function Home() {
       </section>
 
       {/* TESTIMONIALS SECTION */}
-      <section id="testimonials" className="bg-white py-[120px] px-[6vw] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
+      <section id="testimonials" className="bg-[#FFFFFF] py-[120px] px-[6vw] relative overflow-hidden">
+        <div className="max-w-7xl mx-auto pl-10">
           {/* Header Area with Navigation */}
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
             <Reveal className="max-w-2xl text-left">
@@ -837,58 +1042,95 @@ export default function Home() {
                 User Feedback
               </div>
               <h2 className="font-display text-[clamp(2.5rem,4.5vw,3rem)] font-bold text-[#101828] leading-[1.1] tracking-tighter">
-                What our <span className="italic font-serif text-transparent bg-clip-text bg-gradient-to-r from-[#5384CD] to-[#3AC6F5]">Users</span> who<br />
-                have used it say
+                What our <span className="italic font-serif text-transparent bg-clip-text bg-gradient-to-r from-[#5384CD] to-[#3AC6F5]">Users</span> say<br />
+              who have used it.
               </h2>
             </Reveal>
             
-            {/* Navigation Arrows (Mock) */}
+            {/* Navigation Arrows */}
             <div className="flex gap-4 mb-4">
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-50 transition-colors group/nav">
+              <button 
+                onClick={() => {
+                  if (scrollRef.current) {
+                    scrollRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+                  }
+                }}
+                className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-50 transition-colors group/nav active:scale-95 transition-transform"
+              >
                 <svg className="w-6 h-6 transform group-hover/nav:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
               </button>
-              <button className="w-12 h-12 rounded-full bg-[#101828] flex items-center justify-center text-white hover:bg-black transition-colors shadow-lg group/nav">
+              <button 
+                onClick={() => {
+                  if (scrollRef.current) {
+                    scrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+                  }
+                }}
+                className="w-12 h-12 rounded-full bg-[#101828] flex items-center justify-center text-white hover:bg-black transition-colors shadow-lg group/nav active:scale-95 transition-transform"
+              >
                 <svg className="w-6 h-6 transform group-hover/nav:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
             </div>
           </div>
 
           {/* Testimonial Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div 
+            ref={scrollRef}
+            className="flex gap-8 overflow-x-auto snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
+          >
             {[
               {
-                name: "Ramuel Smith",
-                img: "11",
-                quote: "Officink transformed our attendance tracking. The GPS verification is foolproof and our payroll is now 100% accurate every single month."
+                name: "Rahul Mehta",
+                role: "Operations head",
+                img: "/face/Face 1.png",
+                quote: "Managing 400+ field staff was a nightmare before Officink. Now I have real-time visibility into every check-in with 100% location accuracy."
               },
               {
-                name: "Queenita Warless",
-                img: "32",
-                quote: "The mobile app is a total game changer for our field staff. They love the simple interface and I love the real-time reporting from the console."
+                name: "Amit Sharma",
+                role: "COO",
+                img: "/face/Face 3.png",
+                quote: "The depth of reporting in the console is exactly what we needed to scale. Our operational costs dropped by 15% in the first quarter."
               },
               {
-                name: "Wizzard Yanto",
-                img: "44",
-                quote: "Best investment for our growing office. The GST billing and expense tracking have saved my team hours of manual data entry weekly."
+                name: "Priya Nair",
+                role: "HR head",
+                img: "/face/face 2.png",
+                quote: "Payroll used to take four days. With automated attendance sync, we process salaries for our entire workforce in under an hour."
+              },
+              {
+                name: "Daniel Carter",
+                role: "Regional Operations Manager",
+                img: "/face/face 4.png",
+                quote: "Integrating our regional logistics gave us the transparency we lacked. The mobile-first approach is perfect for our distributed team."
+              },
+              {
+                name: "Emily Watson",
+                role: "VP",
+                img: "/face/face 5.png",
+                quote: "The unified visibility into billing and collections has secured our cash flow. We now make decisions based on real-time activity data."
               }
             ].map((testi, i) => (
-              <Reveal key={i} className="p-8 rounded-[32px] bg-gray-50/50 border border-gray-100/50 hover:bg-white hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-500 group">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white shadow-md">
-                    <img src={`https://i.pravatar.cc/150?img=${testi.img}`} alt={testi.name} className="w-full h-full object-cover" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-gray-900">{testi.name}</div>
-                    {/* Dynamic Stars */}
-                    <div className="flex gap-0.5 text-yellow-400 mt-0.5">
-                      {[1, 2, 3, 4, 5].map((s) => (
-                        <svg key={s} className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                      ))}
+              <div key={i} className="min-w-[320px] md:min-w-[395px] snap-start">
+                <div className="h-full p-8 rounded-[32px] bg-[#F9FAFB] border border-gray-100 hover:bg-white hover:shadow-2xl hover:shadow-[#5384CD]/5 transition-all duration-500 group">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white shadow-md transition-transform group-hover:scale-105 duration-500">
+                      <img src={testi.img} alt={testi.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-gray-900 leading-tight group-hover:text-[#101828] transition-colors">{testi.name}</div>
+                      <div className="text-[10px] text-[#5384CD] font-bold uppercase tracking-wider mt-0.5">{testi.role}</div>
+                      {/* Stars */}
+                      <div className="flex gap-0.5 text-yellow-400 mt-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
+                        {[1, 2, 3, 4, 5].map((s) => (
+                          <svg key={s} className="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                        ))}
+                      </div>
                     </div>
                   </div>
+                  <p className="text-gray-600 text-[0.95rem] leading-relaxed font-medium transition-colors group-hover:text-gray-900 italic">
+                    "{testi.quote}"
+                  </p>
                 </div>
-                <p className="text-gray-600 text-[0.95rem] leading-relaxed font-medium">"{testi.quote}"</p>
-              </Reveal>
+              </div>
             ))}
           </div>
         </div>
@@ -998,23 +1240,23 @@ export default function Home() {
             {/* CONNECT */}
             <div>
               <h4 className="text-[11px] font-bold text-white/40 tracking-widest uppercase mb-8 font-mono">Connect</h4>
-              <ul className="space-y-5 text-[15px] font-medium text-[#a1a1aa]">
+              <ul className="space-y-5 text-[14px] font-medium text-[#a1a1aa]">
                 <li>
-                  <a href="tel:+918368198551" className="flex items-center gap-2 hover:text-white transition-colors group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#5384CD]"></span>
-                    +91 8368198551
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:info@thegoldtechnologies.com" className="flex items-center gap-2 hover:text-white transition-colors group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#3AC6F5]"></span>
-                    Email Admin
-                  </a>
+                  <div className="space-y-3">
+                    <a href="tel:+918368198551" className="flex items-center gap-2 hover:text-white transition-colors group">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#5384CD]"></span>
+                      +91 8368198551
+                    </a>
+                    <a href="tel:+917289920660" className="flex items-center gap-2 hover:text-white transition-colors group">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#3AC6F5]"></span>
+                      +91 7289920660
+                    </a>
+                  </div>
                 </li>
                 <li>
                   <div className="text-[#a1a1aa] text-xs mt-4 pl-3 border-l border-white/10 max-w-[200px] leading-relaxed">
-                    <strong className="text-white block mb-1">HQ · India</strong>
-                    SD-369, D block, Shastri Nagar, Ghaziabad, UP
+                    <strong className="text-white block mb-1 tracking-wider">HQ · Noida</strong>
+                    H-141, Sector 63, Noida, Uttar Pradesh
                   </div>
                 </li>
               </ul>
