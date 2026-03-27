@@ -117,29 +117,53 @@ const ModuleCard = ({ module, index, total }: { module: any; index: number; tota
 };
 
 export default function Home() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  // Solutions Carousel State
+  const solScrollRef = useRef<HTMLDivElement>(null);
+  const [isSolDragging, setIsSolDragging] = useState(false);
+  const [solStartX, setSolStartX] = useState(0);
+  const [solScrollLeft, setSolScrollLeft] = useState(0);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    setStartX(e.pageX - (scrollRef.current?.offsetLeft || 0));
-    setScrollLeft(scrollRef.current?.scrollLeft || 0);
+  const handleSolMouseDown = (e: React.MouseEvent) => {
+    setIsSolDragging(true);
+    setSolStartX(e.pageX - (solScrollRef.current?.offsetLeft || 0));
+    setSolScrollLeft(solScrollRef.current?.scrollLeft || 0);
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
+  const handleSolMouseMove = (e: React.MouseEvent) => {
+    if (!isSolDragging) return;
     e.preventDefault();
-    const x = e.pageX - (scrollRef.current?.offsetLeft || 0);
-    const walk = (x - startX) * 2;
-    if (scrollRef.current) {
-      scrollRef.current.scrollLeft = scrollLeft - walk;
+    const x = e.pageX - (solScrollRef.current?.offsetLeft || 0);
+    const walk = (x - solStartX) * 2.5;
+    if (solScrollRef.current) {
+      solScrollRef.current.scrollLeft = solScrollLeft - walk;
     }
   };
 
-  const handleMouseUp = () => setIsDragging(false);
-  const handleMouseLeave = () => setIsDragging(false);
+  const stopSolDragging = () => setIsSolDragging(false);
+
+  // Testimonials Carousel State
+  const testiScrollRef = useRef<HTMLDivElement>(null);
+  const [isTestiDragging, setIsTestiDragging] = useState(false);
+  const [testiStartX, setTestiStartX] = useState(0);
+  const [testiScrollLeft, setTestiScrollLeft] = useState(0);
+
+  const handleTestiMouseDown = (e: React.MouseEvent) => {
+    setIsTestiDragging(true);
+    setTestiStartX(e.pageX - (testiScrollRef.current?.offsetLeft || 0));
+    setTestiScrollLeft(testiScrollRef.current?.scrollLeft || 0);
+  };
+
+  const handleTestiMouseMove = (e: React.MouseEvent) => {
+    if (!isTestiDragging) return;
+    e.preventDefault();
+    const x = e.pageX - (testiScrollRef.current?.offsetLeft || 0);
+    const walk = (x - testiStartX) * 2;
+    if (testiScrollRef.current) {
+      testiScrollRef.current.scrollLeft = testiScrollLeft - walk;
+    }
+  };
+
+  const stopTestiDragging = () => setIsTestiDragging(false);
 
   return (
     <main className="min-h-screen font-body selection:bg-brand-teal selection:text-white ">
@@ -518,13 +542,16 @@ export default function Home() {
         {/* Carousel Container - Aligned exactly with the header above */}
         <div className="pl-6 md:pl-[max(1.5rem,calc((100vw-1280px)/2))]">
           <div 
-            ref={scrollRef}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseLeave}
-            className={`flex gap-6 overflow-x-auto pt-10 pb-24 pr-12 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isDragging ? 'cursor-grabbing select-none scroll-auto !snap-none' : 'cursor-grab scroll-smooth'}`}
-            style={{ scrollSnapType: isDragging ? 'none' : 'x mandatory' }}
+            ref={solScrollRef}
+            onMouseDown={handleSolMouseDown}
+            onMouseMove={handleSolMouseMove}
+            onMouseUp={stopSolDragging}
+            onMouseLeave={stopSolDragging}
+            className={`flex gap-6 overflow-x-auto pt-10 pb-24 pr-12 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isSolDragging ? 'cursor-grabbing select-none scroll-auto !snap-none' : 'cursor-grab scroll-smooth'}`}
+            style={{ 
+              scrollSnapType: isSolDragging ? 'none' : 'x mandatory',
+              WebkitOverflowScrolling: 'touch'
+            }}
           >
             {[
               {
@@ -1034,7 +1061,7 @@ export default function Home() {
 
       {/* TESTIMONIALS SECTION */}
       <section id="testimonials" className="bg-[#FFFFFF] py-[120px] px-[6vw] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto pl-10">
+        <div className="max-w-7xl mx-auto px-6 md:px-0">
           {/* Header Area with Navigation */}
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
             <Reveal className="max-w-2xl text-left">
@@ -1051,8 +1078,8 @@ export default function Home() {
             <div className="flex gap-4 mb-4">
               <button 
                 onClick={() => {
-                  if (scrollRef.current) {
-                    scrollRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+                  if (testiScrollRef.current) {
+                    testiScrollRef.current.scrollBy({ left: -400, behavior: 'smooth' });
                   }
                 }}
                 className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-50 transition-colors group/nav active:scale-95 transition-transform"
@@ -1061,8 +1088,8 @@ export default function Home() {
               </button>
               <button 
                 onClick={() => {
-                  if (scrollRef.current) {
-                    scrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+                  if (testiScrollRef.current) {
+                    testiScrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
                   }
                 }}
                 className="w-12 h-12 rounded-full bg-[#101828] flex items-center justify-center text-white hover:bg-black transition-colors shadow-lg group/nav active:scale-95 transition-transform"
@@ -1071,11 +1098,22 @@ export default function Home() {
               </button>
             </div>
           </div>
+        </div>
 
+        {/* Carousel Container - Aligned dynamic with Solutions section */}
+        <div className="pl-6 md:pl-[max(1.5rem,calc((100vw-1280px)/2))] relative">
           {/* Testimonial Cards */}
           <div 
-            ref={scrollRef}
-            className="flex gap-8 overflow-x-auto snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
+            ref={testiScrollRef}
+            onMouseDown={handleTestiMouseDown}
+            onMouseMove={handleTestiMouseMove}
+            onMouseUp={stopTestiDragging}
+            onMouseLeave={stopTestiDragging}
+            className={`flex gap-8 overflow-x-auto snap-x snap-mandatory pt-4 pb-12 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isTestiDragging ? 'cursor-grabbing select-none scroll-auto !snap-none' : 'cursor-grab scroll-smooth'}`}
+            style={{ 
+              scrollSnapType: isTestiDragging ? 'none' : 'x mandatory',
+              WebkitOverflowScrolling: 'touch'
+            }}
           >
             {[
               {
@@ -1133,6 +1171,18 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-0">
+          {/* Compact Mission/Quote */}
+          <Reveal className="mt-12 text-center px-4 max-w-3xl mx-auto border-t border-gray-100 pt-10">
+            <p className="font-display text-[1.2rem] md:text-[1.35rem] font-bold text-[#101828] leading-tight italic tracking-tight mb-3">
+              "Helping growing businesses regain control through real-time data and complete transparency."
+            </p>
+            <div className="text-[9px] font-bold text-[#5384CD] uppercase tracking-[0.4em] opacity-80">
+              — OFFICINK VISION
+            </div>
+          </Reveal>
         </div>
       </section>
 
