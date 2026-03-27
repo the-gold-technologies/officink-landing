@@ -117,30 +117,6 @@ const ModuleCard = ({ module, index, total }: { module: any; index: number; tota
 };
 
 export default function Home() {
-  // Solutions Carousel State
-  const solScrollRef = useRef<HTMLDivElement>(null);
-  const [isSolDragging, setIsSolDragging] = useState(false);
-  const [solStartX, setSolStartX] = useState(0);
-  const [solScrollLeft, setSolScrollLeft] = useState(0);
-
-  const handleSolMouseDown = (e: React.MouseEvent) => {
-    setIsSolDragging(true);
-    setSolStartX(e.pageX - (solScrollRef.current?.offsetLeft || 0));
-    setSolScrollLeft(solScrollRef.current?.scrollLeft || 0);
-  };
-
-  const handleSolMouseMove = (e: React.MouseEvent) => {
-    if (!isSolDragging) return;
-    e.preventDefault();
-    const x = e.pageX - (solScrollRef.current?.offsetLeft || 0);
-    const walk = (x - solStartX) * 2.5;
-    if (solScrollRef.current) {
-      solScrollRef.current.scrollLeft = solScrollLeft - walk;
-    }
-  };
-
-  const stopSolDragging = () => setIsSolDragging(false);
-
   // Testimonials Carousel State
   const testiScrollRef = useRef<HTMLDivElement>(null);
   const [isTestiDragging, setIsTestiDragging] = useState(false);
@@ -560,25 +536,16 @@ export default function Home() {
           </Reveal>
         </div>
 
-        {/* Carousel Container - Aligned exactly with the header above */}
-        <div className="pl-6 md:pl-[max(1.5rem,calc((100vw-1280px)/2))]">
+        {/* Solutions Grid - Bento Layout */}
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div 
-            ref={solScrollRef}
-            onMouseDown={handleSolMouseDown}
-            onMouseMove={handleSolMouseMove}
-            onMouseUp={stopSolDragging}
-            onMouseLeave={stopSolDragging}
-            className={`flex gap-6 overflow-x-auto pt-10 pb-24 pr-12 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isSolDragging ? 'cursor-grabbing select-none scroll-auto !snap-none' : 'cursor-grab scroll-smooth'}`}
-            style={{ 
-              scrollSnapType: isSolDragging ? 'none' : 'x mandatory',
-              WebkitOverflowScrolling: 'touch'
-            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20"
           >
             {[
               {
-                title: "Attendance Tracking",
+                title: "Attendance Tracking & Verification",
                 label: "Attendance",
-                desc: "GPS & Selfie verification ensuring 100% staff accountability and zero time theft.",
+                desc: "Achieve 100% staff accountability with high-precision GPS-fencing and secure selfie verification at every check-in. Eliminate proxy attendance completely and track field staff movement in real-time. Automatically generate precise clock-in/out logs that sync directly with your monthly payroll for zero-error salary processing.",
                 color: "from-blue-50 to-white",
                 accent: "text-blue-500",
                 icon: (
@@ -586,7 +553,8 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                )
+                ),
+                span: "lg:col-span-2 md:col-span-2"
               },
               {
                 title: "Automated Payroll",
@@ -598,7 +566,8 @@ export default function Home() {
                   <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                )
+                ),
+                span: "lg:col-span-1 md:col-span-1"
               },
               {
                 title: "GST Smart Billing",
@@ -610,7 +579,8 @@ export default function Home() {
                   <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
-                )
+                ),
+                span: "lg:col-span-1 md:col-span-1"
               },
               {
                 title: "Expense Management",
@@ -622,7 +592,8 @@ export default function Home() {
                   <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                   </svg>
-                )
+                ),
+                span: "lg:col-span-1 md:col-span-1"
               },
               {
                 title: "Smart Leave Flow",
@@ -634,51 +605,72 @@ export default function Home() {
                   <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                )
+                ),
+                span: "lg:col-span-1 md:col-span-1"
               },
               {
-                title: "Unified Dashboard",
-                label: "Admin Console",
-                desc: "Real-time visibility into every operational metric from one centralized command center.",
+                title: "Unified Administration Console",
+                label: "Command Center",
+                desc: "A centralized command center that consolidates data across HR, Finance, and Operations. Get real-time cross-module analytics, role-based access controls, and automated reporting systems in one premium high-performance dashboard.",
                 color: "from-sky-50 to-white",
                 accent: "text-[#3AC6F5]",
                 icon: (
                   <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
+                ),
+                span: "lg:col-span-3 md:col-span-2",
+                visual: (
+                  <div className="grid grid-cols-2 gap-3 w-full">
+                    {[
+                      { l: 'Revenue', v: '₹12.4L', c: 'text-emerald-600' },
+                      { l: 'Staff', v: '432', c: 'text-blue-600' },
+                      { l: 'Leaves', v: '12', c: 'text-amber-600' },
+                      { l: 'Tickets', v: '4', c: 'text-rose-600' }
+                    ].map((m, idx) => (
+                      <div key={idx} className="bg-white/80 backdrop-blur-sm p-3 rounded-xl border border-sky-100 shadow-sm">
+                        <div className="text-[9px] font-bold text-gray-400 uppercase">{m.l}</div>
+                        <div className={`text-sm font-black ${m.c}`}>{m.v}</div>
+                      </div>
+                    ))}
+                  </div>
                 )
               }
             ].map((sol, i) => (
-              <div key={i} className="min-w-[280px] md:min-w-[340px] snap-start">
-                <div className={`group relative h-[370px] w-full rounded-[40px] p-8 bg-gradient-to-br ${sol.color} border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col`}>
-                  
-                  {/* Top Header */}
-                  <div className="flex justify-between items-start mb-8">
-                    <div className={`p-3.5 rounded-2xl bg-white shadow-sm border border-gray-50 transition-transform group-hover:scale-110 duration-500 ${sol.accent}`}>
-                      <div className="w-7 h-7">
-                        {sol.icon}
+              <div key={i} className={`${sol.span}`}>
+                <div className={`group relative h-full rounded-[35px] p-6 md:p-8 bg-gradient-to-br ${sol.color} border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-500 flex flex-col min-h-[280px]`}>
+                  <div className="flex flex-col lg:flex-row gap-8 h-full">
+                    {/* Left: Content */}
+                    <div className={`${sol.visual ? 'lg:w-[70%]' : 'w-full'} flex flex-col`}>
+                      {/* Top Header */}
+                      <div className="flex justify-between items-start mb-6">
+                        <div className={`p-3 rounded-2xl bg-white shadow-md border border-gray-50 transition-transform group-hover:scale-110 duration-500 ${sol.accent}`}>
+                          <div className="w-7 h-7">
+                            {sol.icon}
+                          </div>
+                        </div>
+                        <div className="px-4 py-1.5 rounded-xl bg-white shadow-sm border border-gray-50 text-[9px] font-bold text-gray-400 uppercase tracking-widest backdrop-blur-md">
+                          {sol.label}
+                        </div>
+                      </div>
+
+                      {/* Body Content */}
+                      <div className="mt-auto">
+                        <h3 className="text-xl md:text-2xl font-bold text-[#101828] mb-3 tracking-tight leading-tight">
+                          {sol.title}
+                        </h3>
+                        <p className="text-gray-500 text-sm md:text-[0.95rem] leading-relaxed font-medium transition-colors max-w-[95%]">
+                          {sol.desc}
+                        </p>
                       </div>
                     </div>
-                    <div className="px-4 py-1.5 rounded-xl bg-white shadow-sm border border-gray-50 text-[10px] font-bold text-gray-400 uppercase tracking-widest backdrop-blur-md">
-                      {sol.label}
-                    </div>
-                  </div>
 
-                  {/* Body Content */}
-                  <div className="mt-auto">
-                    <h3 className="text-2xl font-bold text-[#101828] mb-4 tracking-tight leading-tight min-h-[3.5rem] flex items-end">
-                      {sol.title}
-                    </h3>
-                    <p className="text-gray-500 text-[0.88rem] leading-relaxed font-medium mb-8 max-w-[95%] min-h-[4.2rem]">
-                      {sol.desc}
-                    </p>
-                    
-                    {/* Circle Link */}
-                    <div className="w-12 h-12 rounded-full bg-white border border-gray-100 flex items-center justify-center text-[#5384CD] shadow-lg group-hover:bg-[#101828] group-hover:text-white transition-all duration-300">
-                      <svg className="w-5 h-5 transform rotate-[-45deg] group-hover:rotate-0 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </div>
+                    {/* Right: Visual Graphics (Only for wide cards) */}
+                    {sol.visual && (
+                      <div className="lg:w-[20%] flex items-center justify-center pt-6 lg:pt-0">
+                        {sol.visual}
+                      </div>
+                    )}
                   </div>
 
                   {/* Soft Background Accent */}
