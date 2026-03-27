@@ -165,6 +165,25 @@ export default function Home() {
 
   const stopTestiDragging = () => setIsTestiDragging(false);
 
+  // Auto-shuffle Testimonials
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (!isTestiDragging) {
+      interval = setInterval(() => {
+        if (testiScrollRef.current) {
+          const { scrollLeft, scrollWidth, clientWidth } = testiScrollRef.current;
+          // If at the end (or near), go back to start, else scroll one card width
+          if (Math.ceil(scrollLeft + clientWidth) >= scrollWidth - 10) {
+            testiScrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            testiScrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+          }
+        }
+      }, 5000); // Shuffle every 5 seconds
+    }
+    return () => clearInterval(interval);
+  }, [isTestiDragging]);
+
   return (
     <main className="min-h-screen font-body selection:bg-brand-teal selection:text-white ">
       {/* NAV */}
@@ -1060,7 +1079,7 @@ export default function Home() {
       </section>
 
       {/* TESTIMONIALS SECTION */}
-      <section id="testimonials" className="bg-[#FFFFFF] py-[120px] px-[6vw] relative overflow-hidden">
+      <section id="testimonials" className="bg-[#FFFFFF] py-[120px] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-0">
           {/* Header Area with Navigation */}
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
