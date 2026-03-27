@@ -211,7 +211,7 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <section id="hero" className="min-h-[100vh] grid grid-cols-1 lg:grid-cols-2 items-center gap-10 max-w-7xl mx-auto pt-[150px] pb-40 relative overflow-hidden ">
+      <section id="hero" className="min-h-[100vh] grid grid-cols-1 lg:grid-cols-2 items-center gap-10 max-w-7xl mx-auto pt-[130px] pb-40 relative overflow-hidden ">
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-[2px] bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] rounded-full"></div>
