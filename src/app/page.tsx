@@ -407,7 +407,7 @@ export default function Home() {
                     "accessible-minds.png",
                     "centriik-logo-new.png",
                     "great-water.png",
-                    "himalyan.png",
+                    "himalyan-agro.png",
                     "indian-vastu-experts-logo-gold.png",
                     "transverse-solutions-logo.png",
                     "cinemac-logo.jpg",
