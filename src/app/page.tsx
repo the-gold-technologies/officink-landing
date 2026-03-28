@@ -174,6 +174,30 @@ export default function Home() {
           <Link href="#cta" className="text-gray-500 text-[14px] hover:text-[#5384CD] transition-colors">Get Started</Link>
         </div>
         <div className="hidden sm:block">
+            <Link
+                href="https://calendly.com/officink-support/30min"
+                target="_blank"
+                className="group relative isolate flex items-center justify-center gap-2 rounded-full bg-[#0B0F1A] py-3.5 font-semibold text-white shadow-[0_4px_0_#1a1f2e] transition-all duration-200 active:translate-y-[4px] active:shadow-none hover:shadow-[0_6px_0_#D1D5DB] hover:-translate-y-1 border-t border-white/10 overflow-hidden w-[180px] no-underline"
+              >
+                <span className="relative z-10 flex items-center gap-2 tracking-wide text-[16px]">
+                  Request Demo
+                  <svg
+                    className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M13.5 4.5L21 12M21 12L13.5 19.5M21 12H3"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+                <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] opacity-0 transition-opacity duration-300 group-hover:opacity-10"></div>
+              </Link>
           <Link
             href="https://console.officink.com"
             target="_blank"
@@ -207,7 +231,7 @@ export default function Home() {
           <div>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="https://console.officink.com"
+                href="https://calendly.com/officink-support/30min"
                 target="_blank"
                 className="group relative isolate flex items-center justify-center gap-2 rounded-full bg-[#0B0F1A] py-3.5 font-semibold text-white shadow-[0_4px_0_#1a1f2e] transition-all duration-200 active:translate-y-[4px] active:shadow-none hover:shadow-[0_6px_0_#D1D5DB] hover:-translate-y-1 border-t border-white/10 overflow-hidden w-[180px] no-underline"
               >
@@ -363,27 +387,38 @@ export default function Home() {
       </section>
 
       {/* INTEGRATIONS MARQUEE */}
-      <section className="pb-16 bg-white relative overflow-hidden">
+      <section className="pb-24 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-[6vw]">
-          <p className="text-center uppercase tracking-[0.2em] text-[11px] font-bold text-gray-400 mb-12">
-            Systems we connect with
-          </p>
+          <div className="text-center mb-12">
+            <h3 className="text-md font-semibold text-gray-900 tracking-tight">
+              Trusted by 50+ Companies
+            </h3>
+            <p className="text-gray-500 text-xs font-normal">
+              From startups to enterprises
+            </p>
+          </div>
           
           <div className="relative flex overflow-hidden group">
-            <div className="flex whitespace-nowrap animate-marquee group-hover:[animation-play-state:paused]">
+            <div className="flex whitespace-nowrap animate-marquee group-hover:[animation-play-state:paused] items-center">
               {[...Array(2)].map((_, i) => (
                 <div key={i} className="flex items-center min-w-max">
                   {[
-                    { name: "HubSpot", color: "#FF7A59", icon: "●" },
-                    { name: "zapier", color: "#FF4F00", icon: "⬡" },
-                    { name: "quickbooks", color: "#2CA01C", icon: "■" },
-                    { name: "xero", color: "#00B7E5", icon: "○" },
-                    { name: "Slack", color: "#4A154B", icon: "✦" },
-                    { name: "Zoom", color: "#2D8CFF", icon: "⬢" },
-                  ].map((brand, idx) => (
-                    <div key={idx} className="flex items-center gap-3 px-12 opacity-40 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300">
-                      <span className="text-3xl" style={{ color: brand.color }}>{brand.icon}</span>
-                      <span className="text-2xl font-bold tracking-tight text-gray-900">{brand.name}</span>
+                    "Absolute Factor Logo.png",
+                    "Accessible Minds.png",
+                    "Centriik_Logo-new.png",
+                    "Great Water.png",
+                    "Himalyan.png",
+                    "Indian_vastu_experts_logo_gold.png",
+                    "Transverse Solutions Logo.png",
+                    "cinemac logo.jpg",
+                    "dalxes.jpeg"
+                  ].map((logo, idx) => (
+                    <div key={idx} className="flex items-center justify-center px-12 py-2 opacity-30 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-110">
+                      <img 
+                        src={`/partner/${logo}`} 
+                        alt="Partner Logo" 
+                        className="h-12 w-auto max-w-[160px] object-contain"
+                      />
                     </div>
                   ))}
                 </div>
@@ -1227,7 +1262,7 @@ export default function Home() {
 
             <div className="flex flex-wrap items-center justify-center gap-6 mb-12">
               <Link
-                href="https://console.officink.com"
+                href="https://calendly.com/officink-support/30min"
                 target="_blank"
                 className="group relative isolate flex items-center justify-center gap-2 rounded-full bg-[#0B0F1A] py-4 px-10 font-semibold text-white shadow-[0_4px_0_#1a1f2e] transition-all duration-200 active:translate-y-[4px] active:shadow-none hover:shadow-[0_6px_0_#D1D5DB] hover:-translate-y-1 border-t border-white/10 overflow-hidden no-underline"
               >
