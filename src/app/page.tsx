@@ -141,6 +141,46 @@ export default function Home() {
 
   const stopTestiDragging = () => setIsTestiDragging(false);
 
+  // Quote Modal State
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [quoteFormData, setQuoteFormData] = useState({
+    name: "",
+    number: "",
+    email: "",
+    company: ""
+  });
+  const [isSubmittingQuote, setIsSubmittingQuote] = useState(false);
+  const [quoteSubmitStatus, setQuoteSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleQuoteSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmittingQuote(true);
+    setQuoteSubmitStatus("idle");
+
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(quoteFormData),
+      });
+
+      if (response.ok) {
+        setQuoteSubmitStatus("success");
+        setTimeout(() => {
+          setIsQuoteModalOpen(false);
+          setQuoteFormData({ name: "", number: "", email: "", company: "" });
+          setQuoteSubmitStatus("idle");
+        }, 2000);
+      } else {
+        setQuoteSubmitStatus("error");
+      }
+    } catch (error) {
+      setQuoteSubmitStatus("error");
+    } finally {
+      setIsSubmittingQuote(false);
+    }
+  };
+
   // Auto-shuffle Testimonials
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -173,35 +213,19 @@ export default function Home() {
           <Link href="#roles" className="text-gray-500 text-[14px] hover:text-[#5384CD] transition-colors">Roles</Link>
           <Link href="#cta" className="text-gray-500 text-[14px] hover:text-[#5384CD] transition-colors">Get Started</Link>
         </div>
-        <div className="hidden sm:block">
-            {/* <Link
-                href="https://calendly.com/officink-support/30min"
-                target="_blank"
-                className="group relative isolate flex items-center justify-center gap-2 rounded-full bg-[#0B0F1A] py-3.5 font-semibold text-white shadow-[0_4px_0_#1a1f2e] transition-all duration-200 active:translate-y-[4px] active:shadow-none hover:shadow-[0_6px_0_#D1D5DB] hover:-translate-y-1 border-t border-white/10 overflow-hidden w-[180px] no-underline"
-              >
-                <span className="relative z-10 flex items-center gap-2 tracking-wide text-[16px]">
-                  Request Demo
-                  <svg
-                    className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.5 4.5L21 12M21 12L13.5 19.5M21 12H3"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] opacity-0 transition-opacity duration-300 group-hover:opacity-10"></div>
-              </Link> */}
+        <div className="hidden sm:flex items-center gap-4">
+          <button
+            onClick={() => setIsQuoteModalOpen(true)}
+            className="group relative isolate flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] px-6 py-2.5 text-[14px] font-bold text-white shadow-[0_3px_0_#3469b6] transition-all duration-200 active:translate-y-[3px] active:shadow-none hover:shadow-[0_5px_0_#9ec0ee] hover:-translate-y-1 overflow-hidden"
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              Request Quote
+            </span>
+          </button>
           <Link
             href="https://console.officink.com"
             target="_blank"
-            className="group relative isolate flex items-center justify-center gap-2 rounded-full bg-[#0B0F1A] px-5 py-2 text-[14px] font-semibold text-white shadow-[0_3px_0_#1a1f2e] transition-all duration-200 active:translate-y-[3px] active:shadow-none hover:shadow-[0_5px_0_#D1D5DB] hover:-translate-y-1 border-t border-white/10 overflow-hidden no-underline"
+            className="group relative isolate flex items-center justify-center gap-2 rounded-full bg-[#0B0F1A] px-6 py-2.5 text-[14px] font-semibold text-white shadow-[0_3px_0_#1a1f2e] transition-all duration-200 active:translate-y-[3px] active:shadow-none hover:shadow-[0_5px_0_#D1D5DB] hover:-translate-y-1 border-t border-white/10 overflow-hidden no-underline"
           >
             <span className="relative z-10 flex items-center gap-2">
               Login
@@ -1351,10 +1375,14 @@ export default function Home() {
                       <span className="w-1.5 h-1.5 rounded-full bg-[#3AC6F5]"></span>
                       +91 7289920660
                     </a>
+                    <a href="mailto:support@officink.com" className="flex items-center gap-2 hover:text-white transition-colors group">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                      support@officink.com
+                    </a>
                   </div>
                 </li>
                 <li>
-                  <div className="text-[#a1a1aa] text-xs mt-4 pl-3 border-l border-white/10 max-w-[200px] leading-relaxed">
+                  <div className="text-[#a1a1aa] text-xs mt-4 pl-3 border-l border-white/10 max-w-[300px] leading-relaxed">
                     <strong className="text-white block mb-1 tracking-wider">HQ · Noida</strong>
                     H-141, Sector 63, Noida, Uttar Pradesh
                   </div>
@@ -1365,7 +1393,7 @@ export default function Home() {
         </div>
 
         {/* GIANT TEXT (Consistent with ROLES/FEATURES labels) */}
-        <div className="mt-10 pb-2 w-full flex justify-center overflow-hidden select-none pointer-events-none opacity-[0.04]">
+        <div className="mt-6 pb-2 w-full flex justify-center overflow-hidden select-none pointer-events-none opacity-[0.04]">
           <h1 className="text-[19vw] font-black text-white leading-[0.8] m-0 p-0 tracking-tighter mix-blend-color-dodge font-sans">
             OFFICINK
           </h1>
@@ -1379,6 +1407,126 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      {/* QUOTE MODAL */}
+      {isQuoteModalOpen && (
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center px-6">
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-md animate-in fade-in duration-300" 
+            onClick={() => setIsQuoteModalOpen(false)}
+          />
+          <div className="relative bg-white rounded-[40px] shadow-2xl w-full max-w-lg p-10 md:p-12 overflow-hidden animate-in zoom-in-95 duration-300">
+            {/* Background Accent */}
+            <div className="absolute -top-24 -right-24 w-60 h-60 bg-[#5384CD]/10 blur-[80px] rounded-full pointer-events-none"></div>
+            
+            <div className="relative z-10">
+              <div className="flex justify-between items-start mb-10">
+                <div>
+                  <h2 className="font-display text-[2.2rem] font-bold text-gray-900 leading-tight">Request Quote</h2>
+                  <p className="text-gray-500 font-medium mt-2">Grow your business with smart automation.</p>
+                </div>
+                <button 
+                  onClick={() => setIsQuoteModalOpen(false)}
+                  className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-all"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <form onSubmit={handleQuoteSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Full Name</label>
+                    <input
+                      required
+                      type="text"
+                      placeholder="Ayush Sharma"
+                      value={quoteFormData.name}
+                      onChange={(e) => setQuoteFormData({ ...quoteFormData, name: e.target.value })}
+                      className="w-full px-6 py-4 rounded-2xl bg-gray-50 border-0 ring-1 ring-gray-100 focus:ring-2 focus:ring-[#5384CD] outline-none transition-all placeholder:text-gray-300 font-medium"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Phone Number</label>
+                    <input
+                      required
+                      type="tel"
+                      placeholder="+91 00000 00000"
+                      value={quoteFormData.number}
+                      onChange={(e) => setQuoteFormData({ ...quoteFormData, number: e.target.value })}
+                      className="w-full px-6 py-4 rounded-2xl bg-gray-50 border-0 ring-1 ring-gray-100 focus:ring-2 focus:ring-[#5384CD] outline-none transition-all placeholder:text-gray-300 font-medium"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Email Address</label>
+                  <input
+                    required
+                    type="email"
+                    placeholder="ayush@company.com"
+                    value={quoteFormData.email}
+                    onChange={(e) => setQuoteFormData({ ...quoteFormData, email: e.target.value })}
+                    className="w-full px-6 py-4 rounded-2xl bg-gray-50 border-0 ring-1 ring-gray-100 focus:ring-2 focus:ring-[#5384CD] outline-none transition-all placeholder:text-gray-300 font-medium"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Company Name</label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="The Gold Technologies"
+                    value={quoteFormData.company}
+                    onChange={(e) => setQuoteFormData({ ...quoteFormData, company: e.target.value })}
+                    className="w-full px-6 py-4 rounded-2xl bg-gray-50 border-0 ring-1 ring-gray-100 focus:ring-2 focus:ring-[#5384CD] outline-none transition-all placeholder:text-gray-300 font-medium"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmittingQuote || quoteSubmitStatus === "success"}
+                  className={`w-full group relative isolate flex items-center justify-center gap-3 rounded-2xl py-5 font-bold text-white shadow-xl transition-all duration-300 overflow-hidden ${
+                    quoteSubmitStatus === "success" 
+                    ? "bg-emerald-500 shadow-emerald-200" 
+                    : "bg-gradient-to-r from-gray-900 to-black hover:shadow-gray-200 active:translate-y-1"
+                  }`}
+                >
+                  <span className="relative z-10 flex items-center gap-3 text-lg">
+                    {isSubmittingQuote ? (
+                      <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                    ) : quoteSubmitStatus === "success" ? (
+                      <>
+                        Request Sent!
+                        <svg className="w-6 h-6 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </>
+                    ) : (
+                      <>
+                        Submit Request
+                        <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                      </>
+                    )}
+                  </span>
+                </button>
+                
+                {quoteSubmitStatus === "error" && (
+                  <p className="text-center text-rose-500 text-sm font-bold animate-shake">
+                    Something went wrong. Please try again.
+                  </p>
+                )}
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
