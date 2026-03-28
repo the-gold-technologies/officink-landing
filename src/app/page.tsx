@@ -174,7 +174,7 @@ export default function Home() {
           <Link href="#cta" className="text-gray-500 text-[14px] hover:text-[#5384CD] transition-colors">Get Started</Link>
         </div>
         <div className="hidden sm:block">
-            <Link
+            {/* <Link
                 href="https://calendly.com/officink-support/30min"
                 target="_blank"
                 className="group relative isolate flex items-center justify-center gap-2 rounded-full bg-[#0B0F1A] py-3.5 font-semibold text-white shadow-[0_4px_0_#1a1f2e] transition-all duration-200 active:translate-y-[4px] active:shadow-none hover:shadow-[0_6px_0_#D1D5DB] hover:-translate-y-1 border-t border-white/10 overflow-hidden w-[180px] no-underline"
@@ -197,7 +197,7 @@ export default function Home() {
                   </svg>
                 </span>
                 <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#5384CD] to-[#3AC6F5] opacity-0 transition-opacity duration-300 group-hover:opacity-10"></div>
-              </Link>
+              </Link> */}
           <Link
             href="https://console.officink.com"
             target="_blank"
