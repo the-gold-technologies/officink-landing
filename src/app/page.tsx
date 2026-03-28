@@ -1046,6 +1046,8 @@ export default function Home() {
             </Reveal>
           </div>
 
+          
+
           {/* Right Cards (Grid) */}
           <div className="lg:w-[55%] grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[
