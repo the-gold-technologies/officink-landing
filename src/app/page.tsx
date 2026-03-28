@@ -997,7 +997,7 @@ export default function Home() {
 
               <div className="flex items-center gap-4 py-6 border-t border-white/10">
                 <div className="flex -space-x-4">
-                  {["Face 1.png", "face 2.png", "Face 3.png"].map((img, i) => (
+                  {["face1.png", "face2.png", "face3.png"].map((img, i) => (
                     <div key={i} className="w-10 h-10 rounded-full border-2 border-[#050511] bg-gray-600 flex items-center justify-center text-[10px] font-bold overflow-hidden shadow-lg">
                       <img src={`/face/${img}`} alt="user" className="w-full h-full object-cover" />
                     </div>
@@ -1132,31 +1132,31 @@ export default function Home() {
               {
                 name: "Rahul Mehta",
                 role: "Operations head",
-                img: "/face/Face 1.png",
+                img: "/face/face1.png",
                 quote: "Managing 400+ field staff was a nightmare before Officink. Now I have real-time visibility into every check-in with 100% location accuracy."
               },
               {
                 name: "Amit Sharma",
                 role: "COO",
-                img: "/face/Face 3.png",
+                img: "/face/face3.png",
                 quote: "The depth of reporting in the console is exactly what we needed to scale. Our operational costs dropped by 15% in the first quarter."
               },
               {
                 name: "Priya Nair",
                 role: "HR head",
-                img: "/face/face 2.png",
+                img: "/face/face2.png",
                 quote: "Payroll used to take four days. With automated attendance sync, we process salaries for our entire workforce in under an hour."
               },
               {
                 name: "Daniel Carter",
                 role: "Regional Operations Manager",
-                img: "/face/face 4.png",
+                img: "/face/face4.png",
                 quote: "Integrating our regional logistics gave us the transparency we lacked. The mobile-first approach is perfect for our distributed team."
               },
               {
                 name: "Emily Watson",
                 role: "VP",
-                img: "/face/face 5.png",
+                img: "/face/face5.png",
                 quote: "The unified visibility into billing and collections has secured our cash flow. We now make decisions based on real-time activity data."
               }
             ].map((testi, i) => (
