@@ -1384,7 +1384,7 @@ export default function Home() {
                 <li>
                   <div className="text-[#a1a1aa] text-xs mt-4 pl-3 border-l border-white/10 max-w-[300px] leading-relaxed">
                     <strong className="text-white block mb-1 tracking-wider">HQ · Noida</strong>
-                    H-141, Sector 63, Noida, Uttar Pradesh
+                    Sector 63, Noida, Uttar Pradesh
                   </div>
                 </li>
               </ul>
