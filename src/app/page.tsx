@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
@@ -782,7 +782,7 @@ export default function Home() {
                 {/* Content */}
                 <div className="relative z-10 p-10 h-full flex items-stretch">
                   {/* Left side - Text content */}
-                  <div className="w-1/2 flex flex-col justify-center">
+                  <div className="lg:w-1/2 md:w-1/2 w-full flex flex-col justify-center">
                     {/* Pink accent circle - Next to title */}
                     <div className="w-16 h-16 bg-gradient-to-br from-[#5384CD] to-[#3AC6F5] rounded-[24px] flex items-center justify-center shadow-lg border-4 border-white/10 mb-8 transition-transform group-hover:scale-110 duration-500">
                       <svg className="w-9 h-9 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -800,7 +800,7 @@ export default function Home() {
                   </div>
 
                   {/* Right side - Phone Mockup */}
-                  <div className="w-1/2 flex items-center justify-end relative">
+                  <div className="lg:w-1/2 md:w-1/2 w-full md:flex items-center justify-end relative hidden">
                     <div className="relative w-[280px] h-[340px]">
                       {/* Phone Frame */}
                       <div className="absolute inset-0 bg-gradient-to-br from-[#3d5a80] to-[#2c3e50] rounded-[32px] shadow-2xl border-[6px] border-[#546e7a] p-3">
@@ -1193,7 +1193,7 @@ export default function Home() {
               {
                 name: "Rahul Mehta",
                 role: "Operations head",
-                img: "/face/face-1.png",
+                img: "/face/face-6.png",
                 quote: "Managing 400+ field staff was a nightmare before Officink. Now I have real-time visibility into every check-in with 100% location accuracy."
               },
               {
@@ -1217,7 +1217,7 @@ export default function Home() {
               {
                 name: "Emily Watson",
                 role: "VP",
-                img: "/face/face-5.png",
+                img: "/face/face-8.png",
                 quote: "The unified visibility into billing and collections has secured our cash flow. We now make decisions based on real-time activity data."
               }
             ].map((testi, i) => (
@@ -1314,7 +1314,6 @@ export default function Home() {
 
            
             
-            <p className="mt-8 text-[11px] font-bold text-gray-400 uppercase tracking-widest">No signup required · Zero setup time</p>
           </Reveal>
         </div>
       </section>
